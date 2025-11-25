@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Bingo Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>🎶 Music Bingo Card Generator 🎶</h1>
+        <p>Select a category and click 'Generate New Cards' to start the music!</p>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-button active" data-genre="all">Complete Mix</button>
+        <button class="tab-button" data-genre="80s">1980s Hits</button>
+        <button class="tab-button" data-genre="rock">Rock Anthems</button>
+        <button class="tab-button" data-genre="pop">Pop Favorites</button>
+        </div>
+
+    <div class="controls">
+        <button id="generate-button">Generate New Cards</button>
+        <button onclick="window.print()">🖨️ Print Cards</button>
+    </div>
+
+    <hr>
+
+    <div id="card-container">
+        </div>
+
+    <div class="playlist-section">
+        <h2>Used Song Playlist (Checklist)</h2>
+        <p>Use this list to set up your master playlist for the game. **Only these songs are on the cards.**</p>
+        <ol id="playlist-output"></ol>
+    </div>
+
+    <footer>
+        <p>Note: This page is optimized to print 6 cards per A4/Letter page. Ensure your print settings are set to 'Landscape' and 'Scale: Fit to Printable Area' (or similar).</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
