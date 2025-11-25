@@ -1,40 +1,94 @@
 // The Master Song List: Song Title (key) and Artist (value)
-// Genre tags are used for filtering: '80s', '90s', '00s', 'pop', 'rock', 'hiphop', 'rnb'
+// Genres/Decades: '60s', '70s', '80s', '90s', '00s', '10s', 'rock', 'pop', 'hiphop', 'rnb', 'country'
 const SONG_DATA = {
+    // 1960s/1970s Classics
+    "Bohemian Rhapsody": { artist: "Queen", genres: ["70s", "rock"] },
+    "Imagine": { artist: "John Lennon", genres: ["70s", "pop"] },
+    "Hotel California": { artist: "Eagles", genres: ["70s", "rock"] },
+    "Dancing Queen": { artist: "ABBA", genres: ["70s", "pop"] },
+    "September": { artist: "Earth, Wind & Fire", genres: ["70s", "rnb"] },
+    "I Want You Back": { artist: "The Jackson 5", genres: ["60s", "pop", "rnb"] },
+    "Hey Jude": { artist: "The Beatles", genres: ["60s", "rock"] },
+    "Respect": { artist: "Aretha Franklin", genres: ["60s", "rnb"] },
+    "Like a Rolling Stone": { artist: "Bob Dylan", genres: ["60s", "rock"] },
+    "Let It Be": { artist: "The Beatles", genres: ["70s", "pop"] },
+    "Bridge Over Troubled Water": { artist: "Simon & Garfunkel", genres: ["70s", "pop"] },
+
     // 1980s Hits
     "Sweet Dreams (Are Made of This)": { artist: "Eurythmics", genres: ["80s", "pop"] },
     "Livin' on a Prayer": { artist: "Bon Jovi", genres: ["80s", "rock"] },
     "Girls Just Want to Have Fun": { artist: "Cyndi Lauper", genres: ["80s", "pop"] },
-    "Billie Jean": { artist: "Michael Jackson", genres: ["80s", "pop"] },
+    "Billie Jean": { artist: "Michael Jackson", genres: ["80s", "pop", "rnb"] },
     "Take On Me": { artist: "a-ha", genres: ["80s", "pop"] },
     "Don't Stop Believin'": { artist: "Journey", genres: ["80s", "rock"] },
     "Walk This Way": { artist: "Run-DMC ft. Aerosmith", genres: ["80s", "hiphop", "rock"] },
     "Like a Virgin": { artist: "Madonna", genres: ["80s", "pop"] },
-    
-    // Rock Anthems
-    "Bohemian Rhapsody": { artist: "Queen", genres: ["rock"] },
+    "Africa": { artist: "Toto", genres: ["80s", "pop"] },
+    "With or Without You": { artist: "U2", genres: ["80s", "rock"] },
+    "Every Breath You Take": { artist: "The Police", genres: ["80s", "rock"] },
+    "Jump": { artist: "Van Halen", genres: ["80s", "rock"] },
+    "Careless Whisper": { artist: "George Michael", genres: ["80s", "pop"] },
+    "I Wanna Dance with Somebody": { artist: "Whitney Houston", genres: ["80s", "pop", "rnb"] },
+
+    // 1990s Hits
     "Smells Like Teen Spirit": { artist: "Nirvana", genres: ["90s", "rock"] },
-    "Welcome to the Jungle": { artist: "Guns N' Roses", genres: ["80s", "rock"] },
-    "Seven Nation Army": { artist: "The White Stripes", genres: ["00s", "rock"] },
-    "Mr. Brightside": { artist: "The Killers", genres: ["00s", "rock"] },
-    "I Love Rock 'N Roll": { artist: "Joan Jett & The Blackhearts", genres: ["rock"] },
-    "Sweet Child o' Mine": { artist: "Guns N' Roses", genres: ["rock"] },
-
-    // Pop Favorites
-    "Oops!... I Did It Again": { artist: "Britney Spears", genres: ["00s", "pop"] },
-    "Single Ladies (Put a Ring on It)": { artist: "Beyoncé", genres: ["00s", "pop", "rnb"] },
-    "Shape of You": { artist: "Ed Sheeran", genres: ["pop"] },
-    "Umbrella": { artist: "Rihanna ft. Jay-Z", genres: ["00s", "pop", "rnb"] },
-    "Uptown Funk": { artist: "Mark Ronson ft. Bruno Mars", genres: ["pop"] },
+    "I Will Always Love You": { artist: "Whitney Houston", genres: ["90s", "rnb", "pop"] },
     "Wannabe": { artist: "Spice Girls", genres: ["90s", "pop"] },
-    "Hips Don't Lie": { artist: "Shakira ft. Wyclef Jean", genres: ["00s", "pop"] },
+    "One": { artist: "U2", genres: ["90s", "rock"] },
+    "Enter Sandman": { artist: "Metallica", genres: ["90s", "rock"] },
+    "Macarena (Bayside Boys Mix)": { artist: "Los del Río", genres: ["90s", "pop"] },
+    "Wonderwall": { artist: "Oasis", genres: ["90s", "rock"] },
+    "...Baby One More Time": { artist: "Britney Spears", genres: ["90s", "pop"] },
+    "Vogue": { artist: "Madonna", genres: ["90s", "pop"] },
+    "Losing My Religion": { artist: "R.E.M.", genres: ["90s", "rock"] },
+    "No Scrubs": { artist: "TLC", genres: ["90s", "rnb"] },
+    "Gettin' Jiggy wit It": { artist: "Will Smith", genres: ["90s", "hiphop"] },
+    "Bitter Sweet Symphony": { artist: "The Verve", genres: ["90s", "rock"] },
+    "My Heart Will Go On": { artist: "Celine Dion", genres: ["90s", "pop"] },
 
-    // More Mix/Other Genres
+    // 2000s Hits
+    "Mr. Brightside": { artist: "The Killers", genres: ["00s", "rock"] },
+    "Crazy In Love": { artist: "Beyoncé ft. Jay-Z", genres: ["00s", "pop", "rnb"] },
     "Lose Yourself": { artist: "Eminem", genres: ["00s", "hiphop"] },
-    "I Will Always Love You": { artist: "Whitney Houston", genres: ["90s", "rnb"] },
-    "Dancing Queen": { artist: "ABBA", genres: ["70s", "pop"] },
-    "September": { artist: "Earth, Wind & Fire", genres: ["70s", "rnb"] },
-    "Hotel California": { artist: "Eagles", genres: ["70s", "rock"] }
+    "Hey Ya!": { artist: "Outkast", genres: ["00s", "pop", "hiphop"] },
+    "Seven Nation Army": { artist: "The White Stripes", genres: ["00s", "rock"] },
+    "Umbrella": { artist: "Rihanna ft. Jay-Z", genres: ["00s", "pop", "rnb"] },
+    "Hips Don't Lie": { artist: "Shakira ft. Wyclef Jean", genres: ["00s", "pop"] },
+    "Since U Been Gone": { artist: "Kelly Clarkson", genres: ["00s", "pop"] },
+    "In Da Club": { artist: "50 Cent", genres: ["00s", "hiphop"] },
+    "Hot N Cold": { artist: "Katy Perry", genres: ["00s", "pop"] },
+    "Wake Me Up When September Ends": { artist: "Green Day", genres: ["00s", "rock"] },
+    "Rolling in the Deep": { artist: "Adele", genres: ["00s", "pop"] },
+    "Hurt": { artist: "Christina Aguilera", genres: ["00s", "pop"] },
+
+    // 2010s Hits
+    "Uptown Funk": { artist: "Mark Ronson ft. Bruno Mars", genres: ["10s", "pop", "rnb"] },
+    "Shape of You": { artist: "Ed Sheeran", genres: ["10s", "pop"] },
+    "Despacito": { artist: "Luis Fonsi & Daddy Yankee", genres: ["10s", "pop"] },
+    "Happy": { artist: "Pharrell Williams", genres: ["10s", "pop", "rnb"] },
+    "Radioactive": { artist: "Imagine Dragons", genres: ["10s", "rock"] },
+    "Party Rock Anthem": { artist: "LMFAO", genres: ["10s", "pop"] },
+    "Old Town Road": { artist: "Lil Nas X ft. Billy Ray Cyrus", genres: ["10s", "country", "hiphop"] },
+    "Shallow": { artist: "Lady Gaga & Bradley Cooper", genres: ["10s", "pop"] },
+    "Blinding Lights": { artist: "The Weeknd", genres: ["10s", "pop", "rnb"] },
+    "Call Me Maybe": { artist: "Carly Rae Jepsen", genres: ["10s", "pop"] },
+    "Thinking Out Loud": { artist: "Ed Sheeran", genres: ["10s", "pop"] },
+    "Somebody That I Used to Know": { artist: "Gotye ft. Kimbra", genres: ["10s", "pop"] },
+
+    // More Rock Anthems (Uncategorized by Decade)
+    "Back in Black": { artist: "AC/DC", genres: ["rock"] },
+    "Sweet Child o' Mine": { artist: "Guns N' Roses", genres: ["rock"] },
+    "I Love Rock 'N Roll": { artist: "Joan Jett & The Blackhearts", genres: ["rock"] },
+
+    // Hip-Hop/R&B (Uncategorized by Decade)
+    "Juicy": { artist: "The Notorious B.I.G.", genres: ["hiphop"] },
+    "California Love": { artist: "2Pac ft. Dr. Dre", genres: ["hiphop"] },
+    "Waterfalls": { artist: "TLC", genres: ["rnb"] },
+    "Smooth Operator": { artist: "Sade", genres: ["rnb"] },
+    
+    // Country (Uncategorized by Decade)
+    "Friends in Low Places": { artist: "Garth Brooks", genres: ["country"] },
+    "Before He Cheats": { artist: "Carrie Underwood", genres: ["country"] }
 };
 
 const CARD_COUNT = 6;
@@ -62,6 +116,7 @@ function getFilteredSongs(genre) {
         return songs;
     }
 
+    // Filter by genre or decade tag
     return songs.filter(song => SONG_DATA[song.title].genres.includes(genre));
 }
 
@@ -70,9 +125,9 @@ function getFilteredSongs(genre) {
 function generateBingoCards() {
     const availableSongs = getFilteredSongs(currentGenre);
     
-    // Safety check: ensure we have enough songs (need at least 25 songs for 1 card)
+    // Safety check: ensure we have enough songs
     if (availableSongs.length < CARD_SIZE) {
-        alert(`Error: You only have ${availableSongs.length} songs for the '${currentGenre}' category. You need at least ${CARD_SIZE} unique songs!`);
+        alert(`Error: The current category ('${currentGenre}') only has ${availableSongs.length} unique songs. You need at least ${CARD_SIZE} unique songs to generate the cards!`);
         return;
     }
 
@@ -84,8 +139,7 @@ function generateBingoCards() {
     // Shuffle the master list of all available songs for this category
     const shuffledSongs = shuffleArray([...availableSongs]);
 
-    // Only take the first 25 * 6 songs (or max available) for the playlist
-    // This ensures that the playlist only contains songs that actually appear on the generated cards.
+    // Only take the first 25 * 6 songs (or max available) for the playlist pool
     const songsOnCards = shuffledSongs.slice(0, Math.min(shuffledSongs.length, CARD_SIZE * CARD_COUNT));
 
     // Generate the Cards
@@ -123,7 +177,7 @@ function generateBingoCards() {
         cardContainer.appendChild(card);
     }
 
-    // Generate the Playlist
+    // Generate the Playlist (all songs used on any card)
     shuffleArray(songsOnCards) // Shuffle the playlist order one last time
         .forEach(song => {
             const listItem = document.createElement('li');
