@@ -1,9 +1,10 @@
-/* --- General Styles --- */
+/* --- General Styles (Screen View) --- */
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
     background-color: #f4f4f9;
     color: #333;
+    line-height: 1.6;
 }
 
 header, .controls, .playlist-section, .tabs {
@@ -14,6 +15,11 @@ header, .controls, .playlist-section, .tabs {
 
 h1 {
     color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 15px;
 }
 
 button {
@@ -23,7 +29,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 #generate-button {
@@ -35,14 +41,13 @@ button {
     background-color: #0056b3;
 }
 
-/* --- Tab Styles --- */
-.tabs {
-    margin-bottom: 20px;
+.tab-button {
+    background-color: #e0e0e0;
+    color: #555;
 }
 
-.tab-button {
-    background-color: #ccc;
-    color: #333;
+.tab-button:hover:not(.active) {
+    background-color: #d0d0d0;
 }
 
 .tab-button.active {
@@ -51,93 +56,110 @@ button {
     font-weight: bold;
 }
 
-/* --- Bingo Card Layout (6-per-page) --- */
+/* --- Bingo Card Container (Screen View) --- */
 #card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px; /* Spacing between cards */
-    margin: 0 auto;
-    max-width: 1000px;
+    gap: 20px; /* Space between cards on screen */
+    margin: 20px auto;
+    max-width: 1200px; /* Allow cards to spread out more on wider screens */
 }
 
 .bingo-card {
     border: 2px solid #333;
-    width: 280px; /* Base width for screen view */
-    height: 280px; /* Base height for screen view */
+    width: 250px; /* Slightly adjusted size for screen preview */
+    height: 250px; /* Keep square aspect ratio */
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     background-color: white;
+    border-radius: 8px;
+    overflow: hidden; /* Ensure content stays within borders */
 }
 
 .card-title {
     background-color: #4CAF50;
     color: white;
-    padding: 5px;
+    padding: 8px;
     text-align: center;
     font-size: 1.1em;
     font-weight: bold;
+    flex-shrink: 0; /* Prevent title from shrinking */
 }
 
 .card-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    flex-grow: 1;
+    flex-grow: 1; /* Allow grid to fill remaining space */
 }
 
 .card-cell {
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 5px;
-    font-size: 0.75em;
-    line-height: 1.2;
+    padding: 3px; /* Reduced padding for smaller text on print */
+    font-size: 0.7em; /* Smaller text to fit song titles */
+    line-height: 1.1;
     overflow: hidden;
+    word-wrap: break-word; /* Ensure long words break */
+    box-sizing: border-box; /* Include padding/border in cell's total width/height */
 }
 
-.card-cell:nth-child(13) { /* Free Space (center cell) */
-    background-color: #ffc107;
+.card-cell.free-space { /* More specific selector for free space */
+    background-color: #ffeb3b; /* A brighter yellow for free space */
     font-weight: bold;
+    color: #333;
 }
 
 /* --- Playlist Styles --- */
 .playlist-section {
     margin-top: 40px;
     border-top: 2px dashed #ccc;
-    padding-top: 20px;
+    padding-top: 25px;
     text-align: left;
 }
 
 .playlist-section h2 {
     text-align: center;
     color: #d9534f;
+    margin-bottom: 20px;
 }
 
 #playlist-output {
-    max-width: 600px;
+    max-width: 700px;
     margin: 10px auto;
-    padding: 10px;
-    list-style-type: none; /* Remove numbering for print optimization */
-    columns: 2; /* Display list in two columns */
-    -webkit-columns: 2;
-    -moz-columns: 2;
+    padding: 0 20px; /* Add some padding on sides */
+    list-style-type: decimal; /* Use numbers for screen view */
+    columns: 1; /* Single column on screen by default */
 }
 
 #playlist-output li {
-    margin-bottom: 5px;
-    page-break-inside: avoid; /* Keep list items from breaking across columns/pages */
+    margin-bottom: 8px;
 }
 
-/* --- Print Media Query: Crucial for A4/6-card layout --- */
+footer {
+    max-width: 900px;
+    margin: 40px auto 20px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+
+/* --- 🖨️ PRINT MEDIA QUERY: Critical for 6 cards per A4/Letter page --- */
 @media print {
     body {
         margin: 0;
         padding: 0;
         background-color: white;
+        -webkit-print-color-adjust: exact; /* Ensure background colors print */
+        print-color-adjust: exact;
     }
 
     /* Hide elements not needed for printing */
@@ -145,32 +167,73 @@ button {
         display: none;
     }
 
-    /* Force the card container to use full page width for 6-per-page layout */
+    /* Card Container: Prepare for 6 cards on a landscape page */
     #card-container {
-        width: 100vw;
-        height: 100vh;
-        max-width: unset;
-        justify-content: flex-start;
-        align-content: flex-start;
-        gap: 0;
-        /* Use absolute positioning or flex basis to ensure 3x2 grid */
+        display: grid;
+        /* A4 landscape roughly 11.7in x 8.3in, or 297mm x 210mm */
+        /* We want 3 columns and 2 rows. Adjust widths/heights to fit. */
+        /* Use absolute units or carefully calculated percentages. */
+        grid-template-columns: repeat(3, 1fr); /* 3 columns */
+        grid-template-rows: repeat(2, 1fr); /* 2 rows */
+        width: 100vw; /* Take full viewport width */
+        height: 100vh; /* Take full viewport height */
+        margin: 0;
+        gap: 0; /* No gap between cards on print */
+        padding: 0.5cm; /* Small margin around the entire grid */
+        box-sizing: border-box; /* Include padding in total dimensions */
     }
 
     .bingo-card {
-        /* Set dimensions for 3 columns and 2 rows on an A4/Letter landscape page */
-        width: 32.5vw; /* Roughly 1/3 of the page width */
-        height: 48vh; /* Roughly 1/2 of the page height */
-        margin: 0.4vw; /* Minimal margin */
-        page-break-inside: avoid; /* Prevents card from splitting across pages */
-        box-shadow: none; /* Remove shadows for cleaner print */
-        border: 1px solid #000;
+        width: auto; /* Let grid handle width */
+        height: auto; /* Let grid handle height */
+        border: 1px solid #000; /* Darker border for print visibility */
+        border-radius: 0; /* No rounded corners for print */
+        box-shadow: none; /* No shadows for print */
+        margin: 0.15cm; /* Very small margin between cards */
+        page-break-inside: avoid; /* Prevent cards from breaking across print pages */
     }
-    
-    /* Ensure the song list is also printed cleanly */
+
+    .card-title {
+        padding: 4px; /* Slightly less padding for print */
+        font-size: 0.9em; /* Smaller title font for print */
+    }
+
+    .card-cell {
+        font-size: 0.6em; /* Further reduce font size for cell content */
+        padding: 2px; /* Minimal padding */
+        border: 0.5px solid #aaa; /* Lighter cell borders */
+    }
+
+    /* Playlist Section: Start on a new page and format as columns */
     .playlist-section {
-        border-top: none;
+        border-top: none; /* Remove dashed line for print */
         padding-top: 0;
-        page-break-before: always; /* Start the playlist on a new page */
+        page-break-before: always; /* Ensure playlist starts on a new page */
+        text-align: left;
+        width: 100%; /* Take full width of the print page */
+        box-sizing: border-box;
+        padding: 1cm; /* Margin for the playlist page */
+    }
+
+    .playlist-section h2 {
+        font-size: 1.5em; /* Adjust playlist title size */
+        margin-bottom: 15px;
         text-align: center;
+    }
+
+    #playlist-output {
+        list-style-type: decimal; /* Use numbers for print list */
+        columns: 2; /* Two columns for playlist on print */
+        -webkit-columns: 2;
+        -moz-columns: 2;
+        max-width: 100%; /* Take full width of print area */
+        padding: 0;
+        margin: 0;
+        font-size: 0.9em;
+    }
+
+    #playlist-output li {
+        margin-bottom: 3px;
+        break-inside: avoid-column; /* Prevent list items from breaking across columns */
     }
 }
