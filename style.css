@@ -1,0 +1,176 @@
+/* --- General Styles --- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header, .controls, .playlist-section, .tabs {
+    max-width: 900px;
+    margin: 0 auto 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #4CAF50;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#generate-button {
+    background-color: #007bff;
+    color: white;
+}
+
+#generate-button:hover {
+    background-color: #0056b3;
+}
+
+/* --- Tab Styles --- */
+.tabs {
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    background-color: #ccc;
+    color: #333;
+}
+
+.tab-button.active {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+/* --- Bingo Card Layout (6-per-page) --- */
+#card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px; /* Spacing between cards */
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+.bingo-card {
+    border: 2px solid #333;
+    width: 280px; /* Base width for screen view */
+    height: 280px; /* Base height for screen view */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: white;
+}
+
+.card-title {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    flex-grow: 1;
+}
+
+.card-cell {
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5px;
+    font-size: 0.75em;
+    line-height: 1.2;
+    overflow: hidden;
+}
+
+.card-cell:nth-child(13) { /* Free Space (center cell) */
+    background-color: #ffc107;
+    font-weight: bold;
+}
+
+/* --- Playlist Styles --- */
+.playlist-section {
+    margin-top: 40px;
+    border-top: 2px dashed #ccc;
+    padding-top: 20px;
+    text-align: left;
+}
+
+.playlist-section h2 {
+    text-align: center;
+    color: #d9534f;
+}
+
+#playlist-output {
+    max-width: 600px;
+    margin: 10px auto;
+    padding: 10px;
+    list-style-type: none; /* Remove numbering for print optimization */
+    columns: 2; /* Display list in two columns */
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+
+#playlist-output li {
+    margin-bottom: 5px;
+    page-break-inside: avoid; /* Keep list items from breaking across columns/pages */
+}
+
+/* --- Print Media Query: Crucial for A4/6-card layout --- */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: white;
+    }
+
+    /* Hide elements not needed for printing */
+    header, .tabs, .controls, footer, hr {
+        display: none;
+    }
+
+    /* Force the card container to use full page width for 6-per-page layout */
+    #card-container {
+        width: 100vw;
+        height: 100vh;
+        max-width: unset;
+        justify-content: flex-start;
+        align-content: flex-start;
+        gap: 0;
+        /* Use absolute positioning or flex basis to ensure 3x2 grid */
+    }
+
+    .bingo-card {
+        /* Set dimensions for 3 columns and 2 rows on an A4/Letter landscape page */
+        width: 32.5vw; /* Roughly 1/3 of the page width */
+        height: 48vh; /* Roughly 1/2 of the page height */
+        margin: 0.4vw; /* Minimal margin */
+        page-break-inside: avoid; /* Prevents card from splitting across pages */
+        box-shadow: none; /* Remove shadows for cleaner print */
+        border: 1px solid #000;
+    }
+    
+    /* Ensure the song list is also printed cleanly */
+    .playlist-section {
+        border-top: none;
+        padding-top: 0;
+        page-break-before: always; /* Start the playlist on a new page */
+        text-align: center;
+    }
+}
