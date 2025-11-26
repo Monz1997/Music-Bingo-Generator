@@ -1,101 +1,105 @@
 // The Master Song List: Song Title (key) and Artist (value)
-// Genres/Decades: '60s', '70s', '80s', '90s', '00s', '10s', 'rock', 'pop', 'hiphop', 'rnb', 'country'
+// Use the tags 'cat1', 'cat2', 'cat3' for your lists.
 const SONG_DATA = {
-    // 1960s/1970s Classics
-    "Bohemian Rhapsody": { artist: "Queen", genres: ["70s", "rock"] },
-    "Imagine": { artist: "John Lennon", genres: ["70s", "pop"] },
-    "Hotel California": { artist: "Eagles", genres: ["70s", "rock"] },
-    "Dancing Queen": { artist: "ABBA", genres: ["70s", "pop"] },
-    "September": { artist: "Earth, Wind & Fire", genres: ["70s", "rnb"] },
-    "I Want You Back": { artist: "The Jackson 5", genres: ["60s", "pop", "rnb"] },
-    "Hey Jude": { artist: "The Beatles", genres: ["60s", "rock"] },
-    "Respect": { artist: "Aretha Franklin", genres: ["60s", "rnb"] },
-    "Like a Rolling Stone": { artist: "Bob Dylan", genres: ["60s", "rock"] },
-    "Let It Be": { artist: "The Beatles", genres: ["70s", "pop"] },
-    "Bridge Over Troubled Water": { artist: "Simon & Garfunkel", genres: ["70s", "pop"] },
-
-    // 1980s Hits
-    "Sweet Dreams (Are Made of This)": { artist: "Eurythmics", genres: ["80s", "pop"] },
-    "Livin' on a Prayer": { artist: "Bon Jovi", genres: ["80s", "rock"] },
-    "Girls Just Want to Have Fun": { artist: "Cyndi Lauper", genres: ["80s", "pop"] },
-    "Billie Jean": { artist: "Michael Jackson", genres: ["80s", "pop", "rnb"] },
-    "Take On Me": { artist: "a-ha", genres: ["80s", "pop"] },
-    "Don't Stop Believin'": { artist: "Journey", genres: ["80s", "rock"] },
-    "Walk This Way": { artist: "Run-DMC ft. Aerosmith", genres: ["80s", "hiphop", "rock"] },
-    "Like a Virgin": { artist: "Madonna", genres: ["80s", "pop"] },
-    "Africa": { artist: "Toto", genres: ["80s", "pop"] },
-    "With or Without You": { artist: "U2", genres: ["80s", "rock"] },
-    "Every Breath You Take": { artist: "The Police", genres: ["80s", "rock"] },
-    "Jump": { artist: "Van Halen", genres: ["80s", "rock"] },
-    "Careless Whisper": { artist: "George Michael", genres: ["80s", "pop"] },
-    "I Wanna Dance with Somebody": { artist: "Whitney Houston", genres: ["80s", "pop", "rnb"] },
-
-    // 1990s Hits
-    "Smells Like Teen Spirit": { artist: "Nirvana", genres: ["90s", "rock"] },
-    "I Will Always Love You": { artist: "Whitney Houston", genres: ["90s", "rnb", "pop"] },
-    "Wannabe": { artist: "Spice Girls", genres: ["90s", "pop"] },
-    "One": { artist: "U2", genres: ["90s", "rock"] },
-    "Enter Sandman": { artist: "Metallica", genres: ["90s", "rock"] },
-    "Macarena (Bayside Boys Mix)": { artist: "Los del Río", genres: ["90s", "pop"] },
-    "Wonderwall": { artist: "Oasis", genres: ["90s", "rock"] },
-    "...Baby One More Time": { artist: "Britney Spears", genres: ["90s", "pop"] },
-    "Vogue": { artist: "Madonna", genres: ["90s", "pop"] },
-    "Losing My Religion": { artist: "R.E.M.", genres: ["90s", "rock"] },
-    "No Scrubs": { artist: "TLC", genres: ["90s", "rnb"] },
-    "Gettin' Jiggy wit It": { artist: "Will Smith", genres: ["90s", "hiphop"] },
-    "Bitter Sweet Symphony": { artist: "The Verve", genres: ["90s", "rock"] },
-    "My Heart Will Go On": { artist: "Celine Dion", genres: ["90s", "pop"] },
-
-    // 2000s Hits
-    "Mr. Brightside": { artist: "The Killers", genres: ["00s", "rock"] },
-    "Crazy In Love": { artist: "Beyoncé ft. Jay-Z", genres: ["00s", "pop", "rnb"] },
-    "Lose Yourself": { artist: "Eminem", genres: ["00s", "hiphop"] },
-    "Hey Ya!": { artist: "Outkast", genres: ["00s", "pop", "hiphop"] },
-    "Seven Nation Army": { artist: "The White Stripes", genres: ["00s", "rock"] },
-    "Umbrella": { artist: "Rihanna ft. Jay-Z", genres: ["00s", "pop", "rnb"] },
-    "Hips Don't Lie": { artist: "Shakira ft. Wyclef Jean", genres: ["00s", "pop"] },
-    "Since U Been Gone": { artist: "Kelly Clarkson", genres: ["00s", "pop"] },
-    "In Da Club": { artist: "50 Cent", genres: ["00s", "hiphop"] },
-    "Hot N Cold": { artist: "Katy Perry", genres: ["00s", "pop"] },
-    "Wake Me Up When September Ends": { artist: "Green Day", genres: ["00s", "rock"] },
-    "Rolling in the Deep": { artist: "Adele", genres: ["00s", "pop"] },
-    "Hurt": { artist: "Christina Aguilera", genres: ["00s", "pop"] },
-
-    // 2010s Hits
-    "Uptown Funk": { artist: "Mark Ronson ft. Bruno Mars", genres: ["10s", "pop", "rnb"] },
-    "Shape of You": { artist: "Ed Sheeran", genres: ["10s", "pop"] },
-    "Despacito": { artist: "Luis Fonsi & Daddy Yankee", genres: ["10s", "pop"] },
-    "Happy": { artist: "Pharrell Williams", genres: ["10s", "pop", "rnb"] },
-    "Radioactive": { artist: "Imagine Dragons", genres: ["10s", "rock"] },
-    "Party Rock Anthem": { artist: "LMFAO", genres: ["10s", "pop"] },
-    "Old Town Road": { artist: "Lil Nas X ft. Billy Ray Cyrus", genres: ["10s", "country", "hiphop"] },
-    "Shallow": { artist: "Lady Gaga & Bradley Cooper", genres: ["10s", "pop"] },
-    "Blinding Lights": { artist: "The Weeknd", genres: ["10s", "pop", "rnb"] },
-    "Call Me Maybe": { artist: "Carly Rae Jepsen", genres: ["10s", "pop"] },
-    "Thinking Out Loud": { artist: "Ed Sheeran", genres: ["10s", "pop"] },
-    "Somebody That I Used to Know": { artist: "Gotye ft. Kimbra", genres: ["10s", "pop"] },
-
-    // More Rock Anthems (Uncategorized by Decade)
-    "Back in Black": { artist: "AC/DC", genres: ["rock"] },
-    "Sweet Child o' Mine": { artist: "Guns N' Roses", genres: ["rock"] },
-    "I Love Rock 'N Roll": { artist: "Joan Jett & The Blackhearts", genres: ["rock"] },
-
-    // Hip-Hop/R&B (Uncategorized by Decade)
-    "Juicy": { artist: "The Notorious B.I.G.", genres: ["hiphop"] },
-    "California Love": { artist: "2Pac ft. Dr. Dre", genres: ["hiphop"] },
-    "Waterfalls": { artist: "TLC", genres: ["rnb"] },
-    "Smooth Operator": { artist: "Sade", genres: ["rnb"] },
     
-    // Country (Uncategorized by Decade)
-    "Friends in Low Places": { artist: "Garth Brooks", genres: ["country"] },
-    "Before He Cheats": { artist: "Carrie Underwood", genres: ["country"] }
+    // --- CATEGORY 1: Classic Rock Relaxation (77 Songs) - Tag: 'cat1' ---
+    "#9 Dream": { artist: "John Lennon", genres: ["cat1", "70s", "pop", "rock"] },
+    "A Horse with No Name": { artist: "America", genres: ["cat1", "70s", "rock", "pop"] },
+    "A Pillow of Winds": { artist: "Pink Floyd", genres: ["cat1", "70s", "rock"] },
+    "Angie (Remastered 2009)": { artist: "The Rolling Stones", genres: ["cat1", "70s", "rock"] },
+    "Beast Of Burden (Remastered 1994)": { artist: "The Rolling Stones", genres: ["cat1", "70s", "rock"] },
+    "Bell Bottom Blues": { artist: "Derek & The Dominos", genres: ["cat1", "70s", "rock"] },
+    "Black Water": { artist: "The Doobie Brothers", genres: ["cat1", "70s", "rock", "pop"] },
+    "Blackbird (Remastered 2009)": { artist: "The Beatles", genres: ["cat1", "60s", "pop"] },
+    "California Dreamin' (Single Version)": { artist: "The Mamas & The Papas", genres: ["cat1", "60s", "pop"] },
+    "Can't Find My Way Home": { artist: "Blind Faith", genres: ["cat1", "60s", "rock"] },
+    "Crazy Love (Van Morrison)": { artist: "Van Morrison", genres: ["cat1", "70s", "pop"] },
+    "Crazy Love (Poco)": { artist: "Poco", genres: ["cat1", "70s", "rock", "pop"] },
+    "Dark Sweet Lady": { artist: "George Harrison", genres: ["cat1", "70s", "pop"] },
+    "Deacon Blues": { artist: "Steely Dan", genres: ["cat1", "70s", "rock", "pop"] },
+    "Dirty Work": { artist: "Steely Dan", genres: ["cat1", "70s", "rock", "pop"] },
+    "Does Anybody Really Know What Time It Is?": { artist: "Chicago", genres: ["cat1", "70s", "rock"] },
+    "Dog & Butterfly": { artist: "Heart", genres: ["cat1", "70s", "rock"] },
+    "Dreams (2004 Remaster)": { artist: "Fleetwood Mac", genres: ["cat1", "70s", "rock", "pop"] },
+    "Everybody's Talkin' (From 'Midnight Cowboy')": { artist: "Harry Nilsson", genres: ["cat1", "60s", "pop"] },
+    "Fearless": { artist: "Pink Floyd", genres: ["cat1", "70s", "rock"] },
+    "For What It's Worth": { artist: "Buffalo Springfield", genres: ["cat1", "60s", "rock"] },
+    "From Now On": { artist: "Supertramp", genres: ["cat1", "70s", "pop", "rock"] },
+    "From the Beginning": { artist: "Emerson, Lake & Palmer", genres: ["cat1", "70s", "rock"] },
+    "God Only Knows (Mono)": { artist: "The Beach Boys", genres: ["cat1", "60s", "pop"] },
+    "Going to California (Remaster)": { artist: "Led Zeppelin", genres: ["cat1", "70s", "rock"] },
+    "Goodbye Yellow Brick Road": { artist: "Elton John", genres: ["cat1", "70s", "pop"] },
+    "Graceland": { artist: "Paul Simon", genres: ["cat1", "80s", "pop"] },
+    "Hello It's Me": { artist: "Todd Rundgren", genres: ["cat1", "70s", "pop"] },
+    "I’ll Have to Say I Love You in a Song": { artist: "Jim Croce", genres: ["cat1", "70s", "pop"] },
+    "I'm Not In Love": { artist: "10cc", genres: ["cat1", "70s", "pop"] },
+    "If You Could Read My Mind": { artist: "Gordon Lightfoot", genres: ["cat1", "70s", "pop"] },
+    "In My Life (Remastered 2009)": { artist: "The Beatles", genres: ["cat1", "60s", "pop"] },
+    "It's Too Late": { artist: "Carole King", genres: ["cat1", "70s", "pop"] },
+    "Knockin' On Heaven's Door": { artist: "Bob Dylan", genres: ["cat1", "70s", "pop"] },
+    "Lady Stardust": { artist: "David Bowie", genres: ["cat1", "70s", "pop", "rock"] },
+    "Lay, Lady, Lay": { artist: "Bob Dylan", genres: ["cat1", "60s", "pop"] },
+    "Let 'Em In": { artist: "Paul McCartney & Wings", genres: ["cat1", "70s", "pop"] },
+    "Let It Be (Remastered 2009)": { artist: "The Beatles", genres: ["cat1", "70s", "pop"] },
+    "Lotta Love": { artist: "Nicolette Larson", genres: ["cat1", "70s", "pop"] },
+    "Mona Lisas And Mad Hatters": { artist: "Elton John", genres: ["cat1", "70s", "pop"] },
+    "My Sweet Lord": { artist: "George Harrison", genres: ["cat1", "70s", "pop"] },
+    "Never Going Back Again (2004 Remaster)": { artist: "Fleetwood Mac", genres: ["cat1", "70s", "rock", "pop"] },
+    "On And On": { artist: "Stephen Bishop", genres: ["cat1", "70s", "pop"] },
+    "Ooh La La": { artist: "Faces", genres: ["cat1", "70s", "rock"] },
+    "Our House": { artist: "Crosby, Stills, Nash & Young", genres: ["cat1", "70s", "pop"] },
+    "Peaceful Easy Feeling": { artist: "Eagles", genres: ["cat1", "70s", "rock"] },
+    "Pink Moon": { artist: "Nick Drake", genres: ["cat1", "70s", "pop"] },
+    "Right Down the Line": { artist: "Gerry Rafferty", genres: ["cat1", "70s", "pop"] },
+    "Ripple": { artist: "Grateful Dead", genres: ["cat1", "70s", "rock"] },
+    "Sara": { artist: "Fleetwood Mac", genres: ["cat1", "70s", "rock", "pop"] },
+    "Sara Smile": { artist: "Daryl Hall & John Oates", genres: ["cat1", "70s", "pop"] },
+    "Scarborough Fair / Canticle": { artist: "Simon & Garfunkel", genres: ["cat1", "60s", "pop"] },
+    "She's Always a Woman": { artist: "Billy Joel", genres: ["cat1", "70s", "pop"] },
+    "She's Gone": { artist: "Daryl Hall & John Oates", genres: ["cat1", "70s", "pop"] },
+    "Slip Slidin' Away": { artist: "Paul Simon", genres: ["cat1", "70s", "pop"] },
+    "Something (Remastered 2009)": { artist: "The Beatles", genres: ["cat1", "60s", "pop"] },
+    "Something in the Way She Moves": { artist: "James Taylor", genres: ["cat1", "70s", "pop"] },
+    "Summer Breeze": { artist: "Seals and Crofts", genres: ["cat1", "70s", "pop"] },
+    "Teach Your Children": { artist: "Crosby, Stills, Nash & Young", genres: ["cat1", "70s", "pop"] },
+    "Thank You (Remaster)": { artist: "Led Zeppelin", genres: ["cat1", "70s", "rock"] },
+    "The Air That I Breathe (2008 Remaster)": { artist: "The Hollies", genres: ["cat1", "70s", "pop"] },
+    "The Long And Winding Road (2021 Mix)": { artist: "The Beatles", genres: ["cat1", "70s", "pop"] },
+    "The Only Living Boy in New York": { artist: "Simon & Garfunkel", genres: ["cat1", "70s", "pop"] },
+    "The Sound of Silence (Electric Version)": { artist: "Simon & Garfunkel", genres: ["cat1", "60s", "pop"] },
+    "The Weight (Remastered 2000)": { artist: "The Band", genres: ["cat1", "60s", "rock"] },
+    "Tin Man": { artist: "America", genres: ["cat1", "70s", "rock", "pop"] },
+    "Tuesday's Gone": { artist: "Lynyrd Skynyrd", genres: ["cat1", "70s", "rock"] },
+    "Undun (2024 Remaster)": { artist: "The Guess Who", genres: ["cat1", "60s", "rock"] },
+    "Waterloo Sunset": { artist: "The Kinks", genres: ["cat1", "60s", "pop"] },
+    "We Just Disagree": { artist: "Dave Mason", genres: ["cat1", "70s", "pop"] },
+    "We've Got Tonight": { artist: "Bob Seger & The Silver Bullet Band", genres: ["cat1", "70s", "rock"] },
+    "Wild Horses (2009 Mix)": { artist: "The Rolling Stones", genres: ["cat1", "70s", "rock"] },
+    "Wild World (2020 Mix)": { artist: "Cat Stevens", genres: ["cat1", "70s", "pop"] },
+    "Winter Time": { artist: "Steve Miller Band", genres: ["cat1", "70s", "rock"] },
+    "You Can Call Me Al": { artist: "Paul Simon", genres: ["cat1", "80s", "pop"] },
+    "You've Got a Friend": { artist: "Carole King", genres: ["cat1", "70s", "pop"] },
+    "Your Song": { artist: "Elton John", genres: ["cat1", "70s", "pop"] },
+    
+    // --- CATEGORY 2: PLACEHOLDER (Use tag 'cat2') ---
+    // PASTE YOUR LIST HERE. Example: "Song Title": { artist: "Artist Name", genres: ["cat2"] },
+    "Hit Song D": { artist: "Artist 4", genres: ["cat2"] },
+    "Hit Song E": { artist: "Artist 5", genres: ["cat2"] },
+    "Hit Song F": { artist: "Artist 6", genres: ["cat2"] },
+
+    // --- CATEGORY 3: PLACEHOLDER (Use tag 'cat3') ---
+    // PASTE YOUR LIST HERE. Example: "Song Title": { artist: "Artist Name", genres: ["cat3"] },
+    "Hit Song G": { artist: "Artist 7", genres: ["cat3"] },
+    "Hit Song H": { artist: "Artist 8", genres: ["cat3"] },
+    "Hit Song I": { artist: "Artist 9", genres: ["cat3"] },
 };
 
+// --- LOGIC REMAINS THE SAME (DO NOT EDIT BELOW THIS LINE) ---
+
 const CARD_COUNT = 6;
-const CARD_SIZE = 25; // 5x5 grid
+const CARD_SIZE = 25; 
 let currentGenre = 'all';
 
-// Helper function to shuffle an array (Fisher-Yates)
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -104,7 +108,6 @@ function shuffleArray(array) {
     return array;
 }
 
-// 1. FILTER SONGS based on the current selection
 function getFilteredSongs(genre) {
     const songs = Object.entries(SONG_DATA).map(([title, data]) => ({
         title,
@@ -116,18 +119,15 @@ function getFilteredSongs(genre) {
         return songs;
     }
 
-    // Filter by genre or decade tag
     return songs.filter(song => SONG_DATA[song.title].genres.includes(genre));
 }
 
-
-// 2. GENERATE CARDS and Playlist
 function generateBingoCards() {
     const availableSongs = getFilteredSongs(currentGenre);
     
-    // Safety check: ensure we have enough songs
+    // Safety check: Needs 25 songs minimum
     if (availableSongs.length < CARD_SIZE) {
-        alert(`Error: The current category ('${currentGenre}') only has ${availableSongs.length} unique songs. You need at least ${CARD_SIZE} unique songs to generate the cards!`);
+        alert(`Error: The current category ('${currentGenre}') only has ${availableSongs.length} unique songs. You need at least ${CARD_SIZE} unique songs to generate the cards! Please select 'Complete Mix' or add more songs to this category in the script.js file.`);
         return;
     }
 
@@ -136,30 +136,21 @@ function generateBingoCards() {
     cardContainer.innerHTML = '';
     playlistOutput.innerHTML = '';
 
-    // Shuffle the master list of all available songs for this category
     const shuffledSongs = shuffleArray([...availableSongs]);
-
-    // Only take the first 25 * 6 songs (or max available) for the playlist pool
     const songsOnCards = shuffledSongs.slice(0, Math.min(shuffledSongs.length, CARD_SIZE * CARD_COUNT));
 
-    // Generate the Cards
     for (let i = 0; i < CARD_COUNT; i++) {
-        // Get 24 unique songs from the `songsOnCards` pool for the current card
-        const cardSongs = shuffleArray([...songsOnCards]).slice(0, CARD_SIZE - 1); // 24 songs
-        
-        // Add the Free Space in the center
+        const cardSongs = shuffleArray([...songsOnCards]).slice(0, CARD_SIZE - 1); 
         cardSongs.splice(12, 0, { full_name: "🎶 FREE SPACE 🎶", isFree: true });
 
         const card = document.createElement('div');
         card.className = 'bingo-card';
         
-        // Add Title/Header
         const title = document.createElement('div');
         title.className = 'card-title';
         title.textContent = `BINGO CARD #${i + 1}`;
         card.appendChild(title);
 
-        // Add Grid
         const grid = document.createElement('div');
         grid.className = 'card-grid';
         
@@ -177,8 +168,7 @@ function generateBingoCards() {
         cardContainer.appendChild(card);
     }
 
-    // Generate the Playlist (all songs used on any card)
-    shuffleArray(songsOnCards) // Shuffle the playlist order one last time
+    shuffleArray(songsOnCards) 
         .forEach(song => {
             const listItem = document.createElement('li');
             listItem.textContent = song.full_name;
@@ -186,27 +176,17 @@ function generateBingoCards() {
         });
 }
 
-// 3. EVENT LISTENERS
-
-// Handle Tab Switching
 document.querySelectorAll('.tab-button').forEach(button => {
     button.addEventListener('click', function() {
-        // Update active class for visual feedback
         document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
         this.classList.add('active');
-        
-        // Update the global genre variable
         currentGenre = this.getAttribute('data-genre');
-        
-        // Generate new cards for the new genre
         generateBingoCards();
     });
 });
 
-// Handle Generate Button Click
 document.getElementById('generate-button').addEventListener('click', generateBingoCards);
 
-// Initial load: Generate cards for the default genre ('all')
 document.addEventListener('DOMContentLoaded', () => {
     generateBingoCards();
 });
