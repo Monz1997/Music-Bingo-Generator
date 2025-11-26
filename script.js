@@ -188,9 +188,9 @@ const SONG_DATA = {
 
 // --- LOGIC STARTS HERE ---
 
-// Configuration for 4x4 Bingo Cards (16 songs + 1 free space = 17 total cells)
+// Configuration for 3x3 Bingo Cards (8 songs + 1 free space = 9 total cells)
 const CARD_COUNT = 6; // Generates 6 unique cards (1 page of 6)
-const CARD_SIZE = 16; // Number of unique songs required on the card (excluding free space)
+const CARD_SIZE = 8; // Number of unique songs required on the card (excluding free space)
 let currentGenre = 'all';
 
 function shuffleArray(array) {
@@ -218,8 +218,8 @@ function getFilteredSongs(genre) {
 function generateBingoCards() {
     const availableSongs = getFilteredSongs(currentGenre);
     
-    // Safety check: Needs enough songs for 10 unique winning potential cards (10 * 16 = 160 unique songs needed)
-    const requiredUniqueSongs = Math.max(160, CARD_SIZE * CARD_COUNT); 
+    // Safety check: Needs enough songs for 10 unique winning potential cards (10 * 8 = 80 unique songs needed)
+    const required UniqueSongs = Math.max(80, CARD_SIZE * CARD_COUNT); 
     
     if (availableSongs.length < requiredUniqueSongs) {
         alert(`Warning: The current category ('${currentGenre}') only has ${availableSongs.length} unique songs. You need at least ${requiredUniqueSongs} unique songs to guarantee 10 potential winning tickets! Please add more songs or switch to 'Complete Mix'.`);
@@ -243,8 +243,8 @@ function generateBingoCards() {
         // Take a unique slice of songs for this card's set
         const cardSongs = shuffleArray(songsOnCards.slice(i * CARD_SIZE, (i + 1) * CARD_SIZE)); 
         
-        // Insert free space at the center position (index 8 of 17 total cells)
-        cardSongs.splice(8, 0, { full_name: "🎶 FREE SPACE 🎶", isFree: true });
+        // Insert free space at the center position (index 4 of 9 total cells)
+        cardSongs.splice(4, 0, { full_name: "🎶 FREE SPACE 🎶", isFree: true });
 
         const card = document.createElement('div');
         card.className = 'bingo-card';
