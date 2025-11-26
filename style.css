@@ -52,8 +52,8 @@ button {
 
 .bingo-card {
     border: 2px solid #333;
-    width: 280px; 
-    height: 320px; 
+    width: 200px; /* Reduced width for 3x3 grid */
+    height: 200px; /* Reduced height for 3x3 grid */
     display: flex;
     flex-direction: column;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1); /* Subtle shadow for screen */
@@ -65,19 +65,19 @@ button {
 .card-title {
     background-color: #ddd; /* Light gray header */
     color: #333;
-    padding: 8px;
+    padding: 6px;
     text-align: center;
-    font-size: 1.1em;
+    font-size: 0.9em;
     font-weight: bold;
     flex-shrink: 0; 
     border-bottom: 1px solid #333;
 }
 
-/* Grid Layout: 4 rows x 4 columns for 16 songs + Free Space */
+/* New Grid Layout: 3 rows x 3 columns for 8 songs + Free Space */
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     flex-grow: 1; 
 }
 
@@ -87,9 +87,9 @@ button {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 3px; 
-    font-size: 0.7em; 
-    line-height: 1.1;
+    padding: 4px; 
+    font-size: 0.75em; /* Larger font for 3x3 grid */
+    line-height: 1.2;
     overflow: hidden;
     word-wrap: break-word; 
     box-sizing: border-box; 
@@ -121,7 +121,7 @@ button {
     columns: 1; 
 }
 
-/* --- 🖨️ PRINT MEDIA QUERY: 6 Cards Per Page ($3 \times 2$ Layout) --- */
+/* --- 🖨️ PRINT MEDIA QUERY: 6 Cards Per Page ($3 \times 2$ Layout, B&W) --- */
 @media print {
     body {
         margin: 0;
@@ -172,14 +172,14 @@ button {
         border-bottom: 1px solid #000;
     }
 
-    /* Grid layout for printing: 4 rows x 4 columns */
+    /* Grid layout for printing: 3 rows x 3 columns */
     .card-grid {
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
     }
     
     .card-cell {
-        font-size: 0.55em; /* Smaller font for 6-card layout */
+        font-size: 0.6em; 
         padding: 1px; 
         border: 1px solid #000; 
         background-color: white !important;
