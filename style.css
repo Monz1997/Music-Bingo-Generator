@@ -2,7 +2,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: #f4f4f9;
+    background-color: #f4f4f9; /* Light background for screen */
     color: #333;
     line-height: 1.6;
 }
@@ -14,27 +14,28 @@ header, .controls, .playlist-section, .tabs {
 }
 
 h1 {
-    color: #4CAF50;
+    color: #333; /* Basic text color */
     margin-bottom: 10px;
 }
 
 button {
     padding: 10px 20px;
     margin: 5px;
-    border: none;
+    border: 1px solid #333;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    background-color: white;
+    color: #333;
     transition: background-color 0.3s ease;
 }
 
 #generate-button {
-    background-color: #007bff;
-    color: white;
+    background-color: #eee;
 }
 
 .tab-button.active {
-    background-color: #4CAF50;
+    background-color: #333;
     color: white;
     font-weight: bold;
 }
@@ -51,50 +52,51 @@ button {
 
 .bingo-card {
     border: 2px solid #333;
-    width: 250px; /* Reduced screen size for new layout */
-    height: 320px; /* Adjusted height for 4x3 grid */
+    width: 280px; 
+    height: 320px; 
     display: flex;
     flex-direction: column;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1); /* Subtle shadow for screen */
     background-color: white;
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden; 
 }
 
 .card-title {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #ddd; /* Light gray header */
+    color: #333;
     padding: 8px;
     text-align: center;
     font-size: 1.1em;
     font-weight: bold;
     flex-shrink: 0; 
+    border-bottom: 1px solid #333;
 }
 
-/* New Grid Layout: 4 rows x 3 columns for 12 songs + Free Space */
+/* Grid Layout: 4 rows x 4 columns for 16 songs + Free Space */
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     flex-grow: 1; 
 }
 
 .card-cell {
-    border: 1px solid #ddd;
+    border: 1px solid #333;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 5px; 
-    font-size: 0.8em; /* Slightly larger text for smaller grid */
-    line-height: 1.2;
+    padding: 3px; 
+    font-size: 0.7em; 
+    line-height: 1.1;
     overflow: hidden;
     word-wrap: break-word; 
     box-sizing: border-box; 
 }
 
 .card-cell.free-space { 
-    background-color: #ffeb3b; 
+    background-color: #ccc; /* Darker gray for the free space */
     font-weight: bold;
     color: #333;
 }
@@ -108,7 +110,7 @@ button {
 }
 .playlist-section h2 {
     text-align: center;
-    color: #d9534f;
+    color: #333;
     margin-bottom: 20px;
 }
 #playlist-output {
@@ -119,14 +121,16 @@ button {
     columns: 1; 
 }
 
-/* --- 🖨️ PRINT MEDIA QUERY: 4 Cards Per Page ($2 \times 2$ Layout) --- */
+/* --- 🖨️ PRINT MEDIA QUERY: 6 Cards Per Page ($3 \times 2$ Layout) --- */
 @media print {
     body {
         margin: 0;
         padding: 0;
         background-color: white;
+        /* Force black and white printing */
         -webkit-print-color-adjust: exact; 
         print-color-adjust: exact;
+        color: #000 !important;
     }
 
     /* Hide elements not needed for printing */
@@ -134,19 +138,19 @@ button {
         display: none;
     }
 
-    /* Card Container: Prepare for 4 cards on a portrait page */
+    /* Card Container: Prepare for 6 cards on a portrait page */
     #card-container {
         display: grid;
-        /* Force 2 columns and 2 rows on the printed page */
+        /* Force 2 columns and 3 rows on the printed page (6 cards total) */
         grid-template-columns: repeat(2, 1fr); 
-        grid-template-rows: repeat(2, 1fr); 
+        grid-template-rows: repeat(3, 1fr); 
         width: 100vw; 
         height: 100vh; 
         margin: 0;
         gap: 0; 
-        padding: 0.5cm; 
+        padding: 0.2cm; /* Less padding for tight fit */
         box-sizing: border-box; 
-        page-break-after: always; /* Ensure a new page after every 4 cards */
+        page-break-after: always; /* Ensure a new page after every 6 cards */
     }
 
     .bingo-card {
@@ -155,26 +159,36 @@ button {
         border: 1px solid #000; 
         border-radius: 0; 
         box-shadow: none; 
-        margin: 0.15cm; 
-        /* Ensure that every 4 cards fit cleanly onto the page */
+        margin: 0.1cm; 
+        background-color: white !important; /* Ensure no background color prints */
         page-break-inside: avoid; 
     }
 
     .card-title {
-        padding: 4px; 
-        font-size: 0.9em; 
+        padding: 3px; 
+        font-size: 0.7em; 
+        background-color: white !important;
+        color: #000 !important;
+        border-bottom: 1px solid #000;
     }
 
-    /* Grid layout for printing: 4 rows x 3 columns */
+    /* Grid layout for printing: 4 rows x 4 columns */
     .card-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(4, 1fr);
     }
     
     .card-cell {
-        font-size: 0.65em; 
-        padding: 2px; 
-        border: 0.5px solid #aaa; 
+        font-size: 0.55em; /* Smaller font for 6-card layout */
+        padding: 1px; 
+        border: 1px solid #000; 
+        background-color: white !important;
+        color: #000 !important;
+    }
+
+    .card-cell.free-space {
+        background-color: #ddd !important; /* Light gray for free space in B&W */
+        color: #000 !important;
     }
 
     /* Playlist Section: Starts on a new page */
@@ -187,10 +201,13 @@ button {
         box-sizing: border-box;
         padding: 1cm; 
     }
+    .playlist-section h2 {
+        color: #000 !important;
+    }
     #playlist-output {
         columns: 2; 
         max-width: 100%; 
-        font-size: 0.9em;
+        font-size: 0.8em;
     }
     #playlist-output li {
         break-inside: avoid-column; 
