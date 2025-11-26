@@ -80,24 +80,116 @@ const SONG_DATA = {
     "You Can Call Me Al": { artist: "Paul Simon", genres: ["cat1", "80s", "pop"] },
     "You've Got a Friend": { artist: "Carole King", genres: ["cat1", "70s", "pop"] },
     "Your Song": { artist: "Elton John", genres: ["cat1", "70s", "pop"] },
-    
-    // --- CATEGORY 2: PLACEHOLDER (Use tag 'cat2') ---
-    // PASTE YOUR LIST HERE. Example: "Song Title": { artist: "Artist Name", genres: ["cat2"] },
-    "Hit Song D": { artist: "Artist 4", genres: ["cat2"] },
-    "Hit Song E": { artist: "Artist 5", genres: ["cat2"] },
-    "Hit Song F": { artist: "Artist 6", genres: ["cat2"] },
 
-    // --- CATEGORY 3: PLACEHOLDER (Use tag 'cat3') ---
-    // PASTE YOUR LIST HERE. Example: "Song Title": { artist: "Artist Name", genres: ["cat3"] },
-    "Hit Song G": { artist: "Artist 7", genres: ["cat3"] },
-    "Hit Song H": { artist: "Artist 8", genres: ["cat3"] },
-    "Hit Song I": { artist: "Artist 9", genres: ["cat3"] },
+
+    // --- CATEGORY 2: PLACEHOLDER (Use tag 'cat2') ---
+    // PASTE YOUR LIST FOR CATEGORY 2 HERE. 
+    "Placeholder Song D": { artist: "Placeholder Artist 4", genres: ["cat2"] },
+    "Placeholder Song E": { artist: "Placeholder Artist 5", genres: ["cat2"] },
+    "Placeholder Song F": { artist: "Placeholder Artist 6", genres: ["cat2"] },
+
+
+    // --- CATEGORY 3: 90s Rock (96 Songs) - Tag: 'cat3' ---
+    "Smells Like Teen Spirit": { artist: "Nirvana", genres: ["cat3", "90s", "rock"] },
+    "November Rain": { artist: "Guns N' Roses", genres: ["cat3", "90s", "rock"] },
+    "What's Up?": { artist: "4 Non Blondes", genres: ["cat3", "90s", "rock"] },
+    "Losing My Religion": { artist: "R.E.M.", genres: ["cat3", "90s", "rock"] },
+    "Everlong": { artist: "Foo Fighters", genres: ["cat3", "90s", "rock"] },
+    "Don't Speak": { artist: "No Doubt", genres: ["cat3", "90s", "pop", "rock"] },
+    "Self Esteem (2008 Remaster)": { artist: "The Offspring", genres: ["cat3", "90s", "rock", "punk"] },
+    "1979": { artist: "The Smashing Pumpkins", genres: ["cat3", "90s", "rock"] },
+    "Basket Case": { artist: "Green Day", genres: ["cat3", "90s", "rock", "punk"] },
+    "Under the Bridge": { artist: "Red Hot Chili Peppers", genres: ["cat3", "90s", "rock"] },
+    "Black Hole Sun": { artist: "Soundgarden", genres: ["cat3", "90s", "rock"] },
+    "All Star": { artist: "Smash Mouth", genres: ["cat3", "90s", "pop", "rock"] },
+    "Fly Away": { artist: "Lenny Kravitz", genres: ["cat3", "90s", "rock"] },
+    "Buddy Holly": { artist: "Weezer", genres: ["cat3", "90s", "rock"] },
+    "Glycerine": { artist: "Bush", genres: ["cat3", "90s", "rock"] },
+    "Cannonball": { artist: "The Breeders", genres: ["cat3", "90s", "rock"] },
+    "Been Caught Stealing": { artist: "Jane's Addiction", genres: ["cat3", "90s", "rock"] },
+    "Midlife Crisis": { artist: "Faith No More", genres: ["cat3", "90s", "rock"] },
+    "Jeremy": { artist: "Pearl Jam", genres: ["cat3", "90s", "rock"] },
+    "Song 2": { artist: "Blur", genres: ["cat3", "90s", "rock"] },
+    "Killing In the Name": { artist: "Rage Against The Machine", genres: ["cat3", "90s", "rock"] },
+    "You Could Be Mine": { artist: "Guns N' Roses", genres: ["cat3", "90s", "rock"] },
+    "Motorcycle Emptiness": { artist: "Manic Street Preachers", genres: ["cat3", "90s", "rock"] },
+    "Monkey Wrench": { artist: "Foo Fighters", genres: ["cat3", "90s", "rock"] },
+    "Plush": { artist: "Stone Temple Pilots", genres: ["cat3", "90s", "rock"] },
+    "Suck My Kiss": { artist: "Red Hot Chili Peppers", genres: ["cat3", "90s", "rock"] },
+    "Come As You Are": { artist: "Nirvana", genres: ["cat3", "90s", "rock"] },
+    "Bullet With Butterfly Wings": { artist: "The Smashing Pumpkins", genres: ["cat3", "90s", "rock"] },
+    "Outshined": { artist: "Soundgarden", genres: ["cat3", "90s", "rock"] },
+    "Alive": { artist: "Pearl Jam", genres: ["cat3", "90s", "rock"] },
+    "Age of Panic (Git-O-Rama Mix)": { artist: "Senser", genres: ["cat3", "90s", "rock"] },
+    "Digging the Grave": { artist: "Faith No More", genres: ["cat3", "90s", "rock"] },
+    "Screamager": { artist: "Therapy?", genres: ["cat3", "90s", "rock"] },
+    "Higher Ground (Remastered 2003)": { artist: "Red Hot Chili Peppers", genres: ["cat3", "90s", "rock"] },
+    "Hobo Humpin' Slobo Babe": { artist: "Whale", genres: ["cat3", "90s", "pop"] },
+    "Sabotage": { artist: "Beastie Boys", genres: ["cat3", "90s", "hiphop"] },
+    "Alice What's the Matter?": { artist: "Terrorvision", genres: ["cat3", "90s", "rock"] },
+    "This Is a Call": { artist: "Foo Fighters", genres: ["cat3", "90s", "rock"] },
+    "All I Wanna Do": { artist: "Sheryl Crow", genres: ["cat3", "90s", "pop"] },
+    "The Chemicals Between Us": { artist: "Bush", genres: ["cat3", "90s", "rock"] },
+    "Lump": { artist: "The Presidents Of The United States Of America", genres: ["cat3", "90s", "rock"] },
+    "A Design for Life (2016 Remastered Version)": { artist: "Manic Street Preachers", genres: ["cat3", "90s", "rock"] },
+    "Pretty Fly (For A White Guy)": { artist: "The Offspring", genres: ["cat3", "90s", "rock", "punk"] },
+    "Bulls On Parade": { artist: "Rage Against The Machine", genres: ["cat3", "90s", "rock"] },
+    "Cherub Rock": { artist: "Smashing Pumpkins", genres: ["cat3", "90s", "rock"] },
+    "Heart-Shaped Box": { artist: "Nirvana", genres: ["cat3", "90s", "rock"] },
+    "Even Flow": { artist: "Pearl Jam", genres: ["cat3", "90s", "rock"] },
+    "Don't Cry": { artist: "Guns N' Roses", genres: ["cat3", "90s", "rock"] },
+    "No Rain": { artist: "Blind Melon", genres: ["cat3", "90s", "rock"] },
+    "Lovin' Machine": { artist: "The Jon Spencer Blues Explosion", genres: ["cat3", "90s", "rock"] },
+    "Everything About You": { artist: "Ugly Kid Joe", genres: ["cat3", "90s", "rock"] },
+    "Kill Your Television": { artist: "Ned's Atomic Dustbin", genres: ["cat3", "90s", "rock"] },
+    "Aeroplane": { artist: "Red Hot Chili Peppers", genres: ["cat3", "90s", "rock"] },
+    "About A Girl": { artist: "Nirvana", genres: ["cat3", "90s", "rock"] },
+    "You Oughta Know": { artist: "Alanis Morissette", genres: ["cat3", "90s", "rock", "pop"] },
+    "Easy": { artist: "Faith No More", genres: ["cat3", "90s", "rock"] },
+    "Today": { artist: "Smashing Pumpkins", genres: ["cat3", "90s", "rock"] },
+    "Once": { artist: "Pearl Jam", genres: ["cat3", "90s", "rock"] },
+    "Drive (Incubus)": { artist: "Incubus", genres: ["cat3", "90s", "rock"] },
+    "Kevin Carter (Remastered Version)": { artist: "Manic Street Preachers", genres: ["cat3", "90s", "rock"] },
+    "Runaway Train (2022 Remaster)": { artist: "Soul Asylum", genres: ["cat3", "90s", "rock"] },
+    "Drive (R.E.M.)": { artist: "R.E.M.", genres: ["cat3", "90s", "rock"] },
+    "Perseverance": { artist: "Terrorvision", genres: ["cat3", "90s", "rock"] },
+    "Remedy": { artist: "The Black Crowes", genres: ["cat3", "90s", "rock"] },
+    "In Bloom": { artist: "Nirvana", genres: ["cat3", "90s", "rock"] },
+    "Hard To Handle": { artist: "The Black Crowes", genres: ["cat3", "90s", "rock"] },
+    "Stupid Girl": { artist: "Garbage", genres: ["cat3", "90s", "rock"] },
+    "Civil War": { artist: "Guns N' Roses", genres: ["cat3", "90s", "rock"] },
+    "Walkin' On The Sun": { artist: "Smash Mouth", genres: ["cat3", "90s", "pop", "rock"] },
+    "Come Back Brighter": { artist: "Reef", genres: ["cat3", "90s", "rock"] },
+    "Come Out and Play (2008 Remaster)": { artist: "The Offspring", genres: ["cat3", "90s", "rock", "punk"] },
+    "Richard III": { artist: "Supergrass", genres: ["cat3", "90s", "rock"] },
+    "I Think I'm Paranoid": { artist: "Garbage", genres: ["cat3", "90s", "rock"] },
+    "Fell On Black Days": { artist: "Soundgarden", genres: ["cat3", "90s", "rock"] },
+    "Celebrity Skin": { artist: "Hole", genres: ["cat3", "90s", "rock"] },
+    "A Change Would Do You Good": { artist: "Sheryl Crow", genres: ["cat3", "90s", "pop"] },
+    "Just A Girl": { artist: "No Doubt", genres: ["cat3", "90s", "pop", "rock"] },
+    "Black": { artist: "Pearl Jam", genres: ["cat3", "90s", "rock"] },
+    "Scar Tissue": { artist: "Red Hot Chili Peppers", genres: ["cat3", "90s", "rock"] },
+    "Santa Monica": { artist: "Everclear", genres: ["cat3", "90s", "rock"] },
+    "Lithium": { artist: "Nirvana", genres: ["cat3", "90s", "rock"] },
+    "Semi-Charmed Life": { artist: "Third Eye Blind", genres: ["cat3", "90s", "pop", "rock"] },
+    "My Own Worst Enemy": { artist: "Lit", genres: ["cat3", "90s", "rock"] },
+    "Muscle Museum": { artist: "Muse", genres: ["cat3", "90s", "rock"] },
+    "Butterfly": { artist: "Crazy Town", genres: ["cat3", "90s", "hiphop", "rock"] },
+    "The Red": { artist: "Chevelle", genres: ["cat3", "90s", "rock"] },
+    "Crazy (Aerosmith)": { artist: "Aerosmith", genres: ["cat3", "90s", "rock"] },
+    "Nancy Boy": { artist: "Placebo", genres: ["cat3", "90s", "rock"] },
+    "Mrs. Robinson (2022 Remastered Edition)": { artist: "The Lemonheads", genres: ["cat3", "90s", "rock"] },
+    "(Everything I Do) I Do It For You (Classic Version)": { artist: "Bryan Adams", genres: ["cat3", "90s", "pop"] },
+    "All Apologies (2013 Mix)": { artist: "Nirvana", genres: ["cat3", "90s", "rock"] },
+    "I Don't Want to Miss a Thing (From 'Armageddon' Soundtrack)": { artist: "Aerosmith", genres: ["cat3", "90s", "rock"] },
+    "Every You Every Me": { artist: "Placebo", genres: ["cat3", "90s", "rock"] },
 };
 
-// --- LOGIC REMAINS THE SAME (DO NOT EDIT BELOW THIS LINE) ---
+// --- LOGIC STARTS HERE ---
 
-const CARD_COUNT = 6;
-const CARD_SIZE = 25; 
+// Configuration for 4x3 Bingo Cards (12 songs + 1 free space = 13 total cells)
+const CARD_COUNT = 8; // Generates 8 unique cards (2 pages of 4)
+const CARD_SIZE = 12; // Number of unique songs required on the card (excluding free space)
 let currentGenre = 'all';
 
 function shuffleArray(array) {
@@ -125,10 +217,17 @@ function getFilteredSongs(genre) {
 function generateBingoCards() {
     const availableSongs = getFilteredSongs(currentGenre);
     
-    // Safety check: Needs 25 songs minimum
-    if (availableSongs.length < CARD_SIZE) {
-        alert(`Error: The current category ('${currentGenre}') only has ${availableSongs.length} unique songs. You need at least ${CARD_SIZE} unique songs to generate the cards! Please select 'Complete Mix' or add more songs to this category in the script.js file.`);
-        return;
+    // Safety check: Needs enough songs for 10 unique winning potential cards (10 * 12 = 120 unique songs needed)
+    // We check for enough songs for the requested CARD_COUNT (8) and a minimum of 10.
+    const requiredUniqueSongs = Math.max(120, CARD_SIZE * CARD_COUNT); 
+    
+    if (availableSongs.length < requiredUniqueSongs) {
+        alert(`Warning: The current category ('${currentGenre}') only has ${availableSongs.length} unique songs. You need at least ${requiredUniqueSongs} unique songs to guarantee 10 potential winning tickets! Please add more songs or switch to 'Complete Mix'.`);
+        // We still allow card generation if the list is big enough for at least one card set (CARD_SIZE * CARD_COUNT)
+        if (availableSongs.length < CARD_SIZE * CARD_COUNT) {
+            alert(`Error: Cannot generate ${CARD_COUNT} cards, list is too short.`);
+            return;
+        }
     }
 
     const cardContainer = document.getElementById('card-container');
@@ -137,11 +236,15 @@ function generateBingoCards() {
     playlistOutput.innerHTML = '';
 
     const shuffledSongs = shuffleArray([...availableSongs]);
-    const songsOnCards = shuffledSongs.slice(0, Math.min(shuffledSongs.length, CARD_SIZE * CARD_COUNT));
+    // Use enough songs to fill all cards
+    const songsOnCards = shuffledSongs.slice(0, CARD_SIZE * CARD_COUNT);
 
     for (let i = 0; i < CARD_COUNT; i++) {
-        const cardSongs = shuffleArray([...songsOnCards]).slice(0, CARD_SIZE - 1); 
-        cardSongs.splice(12, 0, { full_name: "🎶 FREE SPACE 🎶", isFree: true });
+        // Take a unique slice of songs for this card's set
+        const cardSongs = shuffleArray(songsOnCards.slice(i * CARD_SIZE, (i + 1) * CARD_SIZE)); 
+        
+        // Insert free space at the center position (index 6 of 13 total cells)
+        cardSongs.splice(6, 0, { full_name: "🎶 FREE SPACE 🎶", isFree: true });
 
         const card = document.createElement('div');
         card.className = 'bingo-card';
@@ -168,6 +271,7 @@ function generateBingoCards() {
         cardContainer.appendChild(card);
     }
 
+    // Use only the songs that actually appear on the cards for the playlist output
     shuffleArray(songsOnCards) 
         .forEach(song => {
             const listItem = document.createElement('li');
