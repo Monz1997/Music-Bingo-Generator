@@ -10,7 +10,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: #f4f4f9; 
+            background-color: #f4f4f9; /* Light background for screen */
             color: #333;
             line-height: 1.6;
         }
@@ -22,17 +22,17 @@
         }
 
         h1 {
-            color: #333; 
+            color: #333; /* Basic text color */
             margin-bottom: 10px;
         }
 
         button {
-            padding: 10px 15px;
-            margin: 5px 2px;
+            padding: 10px 20px;
+            margin: 5px;
             border: 1px solid #333;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 16px;
             background-color: white;
             color: #333;
             transition: background-color 0.3s ease;
@@ -40,8 +40,6 @@
 
         #generate-button {
             background-color: #eee;
-            font-size: 16px;
-            padding: 12px 25px;
         }
 
         .tab-button.active {
@@ -57,13 +55,14 @@
             justify-content: center;
             gap: 20px; 
             margin: 20px auto;
-            max-width: 1400px;
+            max-width: 1200px; 
         }
 
         .bingo-card {
             border: 2px solid #333;
-            width: 280px; /* Adjusted size for 4x4 */
-            height: 280px; 
+            /* Adjusted size for 4x4 grid on screen */
+            width: 250px; 
+            height: 250px; 
             display: flex;
             flex-direction: column;
             box-shadow: 0 5px 10px rgba(0,0,0,0.1); 
@@ -83,7 +82,7 @@
             border-bottom: 1px solid #333;
         }
 
-        /* Grid Layout: 4 rows x 4 columns for 15 songs + Free Space */
+        /* --- 4x4 Grid Layout --- */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -97,8 +96,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 2px; 
-            font-size: 0.65em; /* Smaller font for 4x4 */
+            padding: 2px; /* Smaller padding for 4x4 */
+            font-size: 0.65em; /* Smaller font for 4x4 grid */
             line-height: 1.1;
             overflow: hidden;
             word-wrap: break-word; 
@@ -109,7 +108,7 @@
             background-color: #ccc; 
             font-weight: bold;
             color: #333;
-            font-size: 0.8em;
+            font-size: 0.8em; /* Slightly larger free space text */
         }
 
         /* --- Playlist Styles --- */
@@ -132,7 +131,7 @@
             columns: 1; 
         }
 
-        /* --- 🖨️ PRINT MEDIA QUERY: 6 Cards Per Page (Optimized Fit for 4x4) --- */
+        /* --- 🖨️ PRINT MEDIA QUERY: 6 Cards Per Page (4x4 Layout) --- */
         @media print {
             body {
                 margin: 0;
@@ -148,7 +147,7 @@
                 display: none;
             }
 
-            /* Card Container: Prepare for 6 cards (2 columns x 3 rows) on a portrait page */
+            /* Card Container: 2 columns x 3 rows on A4 portrait page */
             #card-container {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr); 
@@ -157,8 +156,9 @@
                 height: 29.7cm; 
                 margin: 0 auto; 
                 gap: 0; 
-                padding: 0.3cm; /* Reduced page padding */
+                padding: 0.3cm; 
                 box-sizing: border-box; 
+                page-break-after: always;
             }
 
             .bingo-card {
@@ -168,7 +168,7 @@
                 border: 1px solid #000; 
                 border-radius: 0; 
                 box-shadow: none; 
-                margin: 0.2cm; /* Margin between cards */
+                margin: 0.2cm; 
                 background-color: white !important; 
                 page-break-inside: avoid; 
             }
@@ -188,7 +188,7 @@
             }
             
             .card-cell {
-                font-size: 0.55em; /* Significantly smaller font for 4x4 print */
+                font-size: 0.55em; /* Small font size for 4x4 print */
                 padding: 1px; 
                 border: 1px solid #000; 
                 background-color: white !important;
@@ -230,14 +230,14 @@
 <body>
     <header>
         <h1>🎶 Music Bingo Generator ($4 \times 4$ Categorized)</h1>
-        <p>Select a **Category** and click **Generate New Cards**. (Cards use 15 songs + Free Space)</p>
+        <p>Select a **Category** and click **Generate New Cards**. (Cards use **15 songs + Free Space**)</p>
     </header>
 
     <div class="tabs" id="category-tabs">
         </div>
 
     <div class="controls">
-        <button id="generate-button">Generate New Cards & Playlist</button>
+        <button id="generate-button">Generate 18 Cards & Playlist</button> 
         <button onclick="window.print()">🖨️ Print 6 Cards (4x4) per Page</button>
     </div>
 
@@ -438,7 +438,7 @@
         };
 
         // --- Configuration for 4x4 Bingo Cards ---
-        const CARD_COUNT = 6; // Generates 6 unique cards
+        const CARD_COUNT = 18; // GENERATES A MAXIMUM OF 18 UNIQUE CARDS PER ROUND
         const CARD_SIZE = 15; // Number of unique songs required on the card (15 songs + 1 free space = 16 total cells)
         const FREE_SPACE_INDEX = 7; // Index for the free space (center-top-right in a 4x4 grid: 8th cell)
 
@@ -481,7 +481,7 @@
         function generateBingoCards() {
             const availableSongs = getFilteredSongs(currentGenre);
             
-            // Safety check: Needs enough songs for all cards (6 cards * 15 songs = 90)
+            // Calculate the minimum number of songs needed for the requested cards
             const requiredSongs = CARD_SIZE * CARD_COUNT; 
             
             if (availableSongs.length < requiredSongs) {
@@ -513,7 +513,7 @@
                 // 4. Record the songs for the master playlist
                 cardSongs.forEach(song => masterPlaylistSongs.add(song.full_name)); 
                 
-                // Insert free space at the center position
+                // Insert free space at the center position (index 7 for 4x4)
                 cardSongs.splice(FREE_SPACE_INDEX, 0, { full_name: "🎶 FREE SPACE 🎶", isFree: true });
 
                 const card = document.createElement('div');
