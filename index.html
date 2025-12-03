@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Bingo Generator (3x3 B&W)</title>
+    <title>Music Bingo Generator (4x4 B&W)</title>
 
     <style>
         /* --- General Styles (Screen View) --- */
@@ -27,12 +27,12 @@
         }
 
         button {
-            padding: 10px 20px;
-            margin: 5px;
+            padding: 10px 15px;
+            margin: 5px 2px;
             border: 1px solid #333;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px; /* Reduced button font size */
             background-color: white;
             color: #333;
             transition: background-color 0.3s ease;
@@ -40,6 +40,8 @@
 
         #generate-button {
             background-color: #eee;
+            font-size: 16px;
+            padding: 12px 25px;
         }
 
         .tab-button.active {
@@ -55,13 +57,13 @@
             justify-content: center;
             gap: 20px; 
             margin: 20px auto;
-            max-width: 1200px; 
+            max-width: 1400px; /* Wider container for bigger cards */
         }
 
         .bingo-card {
             border: 2px solid #333;
-            width: 200px; 
-            height: 200px; 
+            width: 250px; /* Increased size for 4x4 grid */
+            height: 250px; 
             display: flex;
             flex-direction: column;
             box-shadow: 0 5px 10px rgba(0,0,0,0.1); 
@@ -81,11 +83,11 @@
             border-bottom: 1px solid #333;
         }
 
-        /* Grid Layout: 3 rows x 3 columns for 8 songs + Free Space */
+        /* Grid Layout: 4 rows x 4 columns for 15 songs + Free Space */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
             flex-grow: 1; 
         }
 
@@ -95,9 +97,9 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 4px; 
-            font-size: 0.75em; 
-            line-height: 1.2;
+            padding: 2px; /* Less padding for more text room */
+            font-size: 0.65em; /* Smaller font for 16 cells */
+            line-height: 1.1;
             overflow: hidden;
             word-wrap: break-word; 
             box-sizing: border-box; 
@@ -135,7 +137,6 @@
                 margin: 0;
                 padding: 0;
                 background-color: white;
-                /* Force black and white printing */
                 -webkit-print-color-adjust: exact; 
                 print-color-adjust: exact;
                 color: #000 !important;
@@ -146,19 +147,17 @@
                 display: none;
             }
 
-            /* Card Container: Prepare for 6 cards on a portrait page */
+            /* Card Container: Prepare for 6 cards (2 columns x 3 rows) on a portrait page */
             #card-container {
                 display: grid;
-                /* 2 columns and 3 rows */
                 grid-template-columns: repeat(2, 1fr); 
                 grid-template-rows: repeat(3, 1fr); 
-                width: 100vw; 
-                height: 100vh; 
-                margin: 0;
+                width: 21cm; 
+                height: 29.7cm; 
+                margin: 0 auto; 
                 gap: 0; 
-                padding: 0.1cm; /* Reduced page padding for max size */
+                padding: 0.2cm; /* Page padding */
                 box-sizing: border-box; 
-                page-break-after: always;
             }
 
             .bingo-card {
@@ -167,34 +166,31 @@
                 border: 1px solid #000; 
                 border-radius: 0; 
                 box-shadow: none; 
-                margin: 0.05cm; /* Minimal margin between cards */
+                margin: 0.15cm; /* Margin between cards */
                 background-color: white !important; 
                 page-break-inside: avoid; 
             }
 
             .card-title {
                 padding: 2px; 
-                font-size: 0.75em; 
+                font-size: 0.7em; /* Small title font for 4x4 */
                 background-color: white !important;
                 color: #000 !important;
                 border-bottom: 1px solid #000;
             }
 
-            /* Grid layout for printing: 3 rows x 3 columns */
+            /* Grid layout for printing: 4 rows x 4 columns */
             .card-grid {
-                grid-template-columns: repeat(3, 1fr);
-                grid-template-rows: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(4, 1fr);
             }
             
             .card-cell {
-                font-size: 0.65em; /* Optimized font size */
+                font-size: 0.55em; /* Very small font for max fit */
                 padding: 1px; 
                 border: 1px solid #000; 
                 background-color: white !important;
                 color: #000 !important;
-                overflow: hidden; 
-                word-wrap: break-word; 
-                white-space: normal; 
             }
 
             .card-cell.free-space {
@@ -205,6 +201,7 @@
 
             /* Playlist Section: Starts on a new page */
             .playlist-section {
+                display: block;
                 border-top: none; 
                 padding-top: 0;
                 page-break-before: always; 
@@ -229,15 +226,12 @@
     </head>
 <body>
     <header>
-        <h1>🎶 Music Bingo Generator ($3 \times 3$ B&W)</h1>
-        <p>Select a Category and click Generate Cards.</p>
+        <h1>🎶 Music Bingo Generator ($4 \times 4$ B&W)</h1>
+        <p>Select a Decade and click Generate Cards.</p>
     </header>
 
-    <div class="tabs">
+    <div class="tabs" id="decade-tabs">
         <button class="tab-button active" data-genre="all">Complete Mix</button>
-        <button class="tab-button" data-genre="cat1">Category 1 (Classic Rock)</button>
-        <button class="tab-button" data-genre="cat3">Category 3 (90s Rock)</button>
-        <button class="tab-button" data-genre="cat2">Category 2 (Placeholder)</button>
     </div>
 
     <div class="controls">
@@ -255,199 +249,202 @@
     </section>
 
     <script>
-        // The Master Song List: Song Title (key) and Artist (value)
-        const SONG_DATA = {
-            
-            // --- CATEGORY 1: Classic Rock Relaxation (77 Songs) - Tag: 'cat1' ---
-            "#9 Dream": { artist: "John Lennon", genres: ["cat1", "70s", "pop", "rock"] },
-            "A Horse with No Name": { artist: "America", genres: ["cat1", "70s", "rock", "pop"] },
-            "A Pillow of Winds": { artist: "Pink Floyd", genres: ["cat1", "70s", "rock"] },
-            "Angie (Remastered 2009)": { artist: "The Rolling Stones", genres: ["cat1", "70s", "rock"] },
-            "Beast Of Burden (Remastered 1994)": { artist: "The Rolling Stones", genres: ["cat1", "70s", "rock"] },
-            "Bell Bottom Blues": { artist: "Derek & The Dominos", genres: ["cat1", "70s", "rock"] },
-            "Black Water": { artist: "The Doobie Brothers", genres: ["cat1", "70s", "rock", "pop"] },
-            "Blackbird (Remastered 2009)": { artist: "The Beatles", genres: ["cat1", "60s", "pop"] },
-            "California Dreamin' (Single Version)": { artist: "The Mamas & The Papas", genres: ["cat1", "60s", "pop"] },
-            "Can't Find My Way Home": { artist: "Blind Faith", genres: ["cat1", "60s", "rock"] },
-            "Crazy Love (Van Morrison)": { artist: "Van Morrison", genres: ["cat1", "70s", "pop"] },
-            "Crazy Love (Poco)": { artist: "Poco", genres: ["cat1", "70s", "rock", "pop"] },
-            "Dark Sweet Lady": { artist: "George Harrison", genres: ["cat1", "70s", "pop"] },
-            "Deacon Blues": { artist: "Steely Dan", genres: ["cat1", "70s", "rock", "pop"] },
-            "Dirty Work": { artist: "Steely Dan", genres: ["cat1", "70s", "rock", "pop"] },
-            "Does Anybody Really Know What Time It Is?": { artist: "Chicago", genres: ["cat1", "70s", "rock"] },
-            "Dog & Butterfly": { artist: "Heart", genres: ["cat1", "70s", "rock"] },
-            "Dreams (2004 Remaster)": { artist: "Fleetwood Mac", genres: ["cat1", "70s", "rock", "pop"] },
-            "Everybody's Talkin' (From 'Midnight Cowboy')": { artist: "Harry Nilsson", genres: ["cat1", "60s", "pop"] },
-            "Fearless": { artist: "Pink Floyd", genres: ["cat1", "70s", "rock"] },
-            "For What It's Worth": { artist: "Buffalo Springfield", genres: ["cat1", "60s", "rock"] },
-            "From Now On": { artist: "Supertramp", genres: ["cat1", "70s", "pop", "rock"] },
-            "From the Beginning": { artist: "Emerson, Lake & Palmer", genres: ["cat1", "70s", "rock"] },
-            "God Only Knows (Mono)": { artist: "The Beach Boys", genres: ["cat1", "60s", "pop"] },
-            "Going to California (Remaster)": { artist: "Led Zeppelin", genres: ["cat1", "70s", "rock"] },
-            "Goodbye Yellow Brick Road": { artist: "Elton John", genres: ["cat1", "70s", "pop"] },
-            "Graceland": { artist: "Paul Simon", genres: ["cat1", "80s", "pop"] },
-            "Hello It's Me": { artist: "Todd Rundgren", genres: ["cat1", "70s", "pop"] },
-            "I’ll Have to Say I Love You in a Song": { artist: "Jim Croce", genres: ["cat1", "70s", "pop"] },
-            "I'm Not In Love": { artist: "10cc", genres: ["cat1", "70s", "pop"] },
-            "If You Could Read My Mind": { artist: "Gordon Lightfoot", genres: ["cat1", "70s", "pop"] },
-            "In My Life (Remastered 2009)": { artist: "The Beatles", genres: ["cat1", "60s", "pop"] },
-            "It's Too Late": { artist: "Carole King", genres: ["cat1", "70s", "pop"] },
-            "Knockin' On Heaven's Door": { artist: "Bob Dylan", genres: ["cat1", "70s", "pop"] },
-            "Lady Stardust": { artist: "David Bowie", genres: ["cat1", "70s", "pop", "rock"] },
-            "Lay, Lady, Lay": { artist: "Bob Dylan", genres: ["cat1", "60s", "pop"] },
-            "Let 'Em In": { artist: "Paul McCartney & Wings", genres: ["cat1", "70s", "pop"] },
-            "Let It Be (Remastered 2009)": { artist: "The Beatles", genres: ["cat1", "70s", "pop"] },
-            "Lotta Love": { artist: "Nicolette Larson", genres: ["cat1", "70s", "pop"] },
-            "Mona Lisas And Mad Hatters": { artist: "Elton John", genres: ["cat1", "70s", "pop"] },
-            "My Sweet Lord": { artist: "George Harrison", genres: ["cat1", "70s", "pop"] },
-            "Never Going Back Again (2004 Remaster)": { artist: "Fleetwood Mac", genres: ["cat1", "70s", "rock", "pop"] },
-            "On And On": { artist: "Stephen Bishop", genres: ["cat1", "70s", "pop"] },
-            "Ooh La La": { artist: "Faces", genres: ["cat1", "70s", "rock"] },
-            "Our House": { artist: "Crosby, Stills, Nash & Young", genres: ["cat1", "70s", "pop"] },
-            "Peaceful Easy Feeling": { artist: "Eagles", genres: ["cat1", "70s", "rock"] },
-            "Pink Moon": { artist: "Nick Drake", genres: ["cat1", "70s", "pop"] },
-            "Right Down the Line": { artist: "Gerry Rafferty", genres: ["cat1", "70s", "pop"] },
-            "Ripple": { artist: "Grateful Dead", genres: ["cat1", "70s", "rock"] },
-            "Sara": { artist: "Fleetwood Mac", genres: ["cat1", "70s", "rock", "pop"] },
-            "Sara Smile": { artist: "Daryl Hall & John Oates", genres: ["cat1", "70s", "pop"] },
-            "Scarborough Fair / Canticle": { artist: "Simon & Garfunkel", genres: ["cat1", "60s", "pop"] },
-            "She's Always a Woman": { artist: "Billy Joel", genres: ["cat1", "70s", "pop"] },
-            "She's Gone": { artist: "Daryl Hall & John Oates", genres: ["cat1", "70s", "pop"] },
-            "Slip Slidin' Away": { artist: "Paul Simon", genres: ["cat1", "70s", "pop"] },
-            "Something (Remastered 2009)": { artist: "The Beatles", genres: ["cat1", "60s", "pop"] },
-            "Something in the Way She Moves": { artist: "James Taylor", genres: ["cat1", "70s", "pop"] },
-            "Summer Breeze": { artist: "Seals and Crofts", genres: ["cat1", "70s", "pop"] },
-            "Teach Your Children": { artist: "Crosby, Stills, Nash & Young", genres: ["cat1", "70s", "pop"] },
-            "Thank You (Remaster)": { artist: "Led Zeppelin", genres: ["cat1", "70s", "rock"] },
-            "The Air That I Breathe (2008 Remaster)": { artist: "The Hollies", genres: ["cat1", "70s", "pop"] },
-            "The Long And Winding Road (2021 Mix)": { artist: "The Beatles", genres: ["cat1", "70s", "pop"] },
-            "The Only Living Boy in New York": { artist: "Simon & Garfunkel", genres: ["cat1", "70s", "pop"] },
-            "The Sound of Silence (Electric Version)": { artist: "Simon & Garfunkel", genres: ["cat1", "60s", "pop"] },
-            "The Weight (Remastered 2000)": { artist: "The Band", genres: ["cat1", "60s", "rock"] },
-            "Tin Man": { artist: "America", genres: ["cat1", "70s", "rock", "pop"] },
-            "Tuesday's Gone": { artist: "Lynyrd Skynyrd", genres: ["cat1", "70s", "rock"] },
-            "Undun (2024 Remaster)": { artist: "The Guess Who", genres: ["cat1", "60s", "rock"] },
-            "Waterloo Sunset": { artist: "The Kinks", genres: ["cat1", "60s", "pop"] },
-            "We Just Disagree": { artist: "Dave Mason", genres: ["cat1", "70s", "pop"] },
-            "We've Got Tonight": { artist: "Bob Seger & The Silver Bullet Band", genres: ["cat1", "70s", "rock"] },
-            "Wild Horses (2009 Mix)": { artist: "The Rolling Stones", genres: ["cat1", "70s", "rock"] },
-            "Wild World (2020 Mix)": { artist: "Cat Stevens", genres: ["cat1", "70s", "pop"] },
-            "Winter Time": { artist: "Steve Miller Band", genres: ["cat1", "70s", "rock"] },
-            "You Can Call Me Al": { artist: "Paul Simon", genres: ["cat1", "80s", "pop"] },
-            "You've Got a Friend": { artist: "Carole King", genres: ["cat1", "70s", "pop"] },
-            "Your Song": { artist: "Elton John", genres: ["cat1", "70s", "pop"] },
+        // --- EMBEDDED SONG LIST (Consolidated from all user requests) ---
+        const RAW_SONG_LIST = [
+            "Baby One More Time - Britney Spears", "867-5309 / Jenny - Tommy Tutone",
+            "9 to 5 - Dolly Parton", "Africa - Toto", "Ain't No Mountain High Enough - Marvin Gaye & Tammi Terrell",
+            "All I Wanna Do - Sheryl Crow", "All Night Long (All Night) - Lionel Richie",
+            "Beast Of Burden - The Rolling Stones", "Believe - Cher", "Bitch - Meredith Brooks",
+            "Brandy (You're a Fine Girl) - Looking Glass", "Breakfast At Tiffany's - Deep Blue Something",
+            "Brown Eyed Girl - Van Morrison", "Build Me Up Buttercup - The Foundations",
+            "Call Me Maybe - Carly Rae Jepsen", "Celebration - Kool & The Gang", "Centerfold - The J. Geils Band",
+            "Closing Time - Semisonic", "Come and Get Your Love - Redbone", "Come On Eileen - Dexys Midnight Runners",
+            "Complicated - Avril Lavigne", "Dancing Queen - ABBA", "Don't Stop Believin' - Journey",
+            "Don't Stop Me Now - Queen", "Doo Wop (That Thing) - Lauryn Hill", "Dreamlover - Mariah Carey",
+            "Dreams - The Cranberries", "Emotions - Mariah Carey", "Every Morning - Sugar Ray",
+            "Everybody Wants to rule the world - Tears for Fears",
+            "Smells Like Teen Spirit - Nirvana", "November Rain - Guns N' Roses", "What's Up? - 4 Non Blondes",
+            "Losing My Religion - R.E.M.", "Everlong - Foo Fighters", "Don't Speak - No Doubt",
+            "Self Esteem - The Offspring", "1979 - The Smashing Pumpkins", "Basket Case - Green Day",
+            "Under the Bridge - Red Hot Chili Peppers", "Black Hole Sun - Soundgarden", "All Star - Smash Mouth",
+            "Fly Away - Lenny Kravitz", "Buddy Holly - Weezer", "Glycerine - Bush", "Cannonball - The Breeders",
+            "Been Caught Stealing - Jane's Addiction", "Midlife Crisis - Faith No More", "Jeremy - Pearl Jam",
+            "Song 2 - Blur", "Killing In the Name - Rage Against The Machine", "You Could Be Mine - Guns N' Roses",
+            "Motorcycle Emptiness - Manic Street Preachers", "Monkey Wrench - Foo Fighters",
+            "Plush - Stone Temple Pilots", "Suck My Kiss - Red Hot Chili Peppers", "Come As You Are - Nirvana",
+            "Bullet With Butterfly Wings - The Smashing Puppets", "Outshined - Soundgarden",
+            "Dream - John Lennon", "A Horse with No Name - America", "A Pillow of Winds - Pink Floyd",
+            "Angie - The Rolling Stones", "Bell Bottom Blues - Derek & The Dominos", "Black Water - The Doobie Brothers",
+            "Blackbird - The Beatles", "California Dreamin' - The Mamas & The Papas", "Can't Find My Way Home - Blind Faith",
+            "Crazy Love - Van Morrison", "Crazy Love - Poco", "Dark Sweet Lady - George Harrison",
+            "Deacon Blues - Steely Dan", "Dirty Work - Steely Dan", "Does Anybody Really Know What Time Is It? - Chicago",
+            "Dog & Butterfly - Heart", "Dreams - Fleetwood Mac", "Everybody's Talkin' - Harry Nilsson",
+            "Fearless - Pink Floyd", "For What It's Worth - Buffalo Springfield", "From Now On - Supertramp",
+            "From the Beginning - Emerson, Lake & Palmer", "God Only Knows - The Beach Boys",
+            "Going to California - Led Zeppelin", "Goodbye Yellow Brick Road - Elton John", "Graceland - Paul Simon",
 
+            // Pop, Rock, and 80s additions
+            "Billie Jean - Michael Jackson", "Like a Prayer - Madonna", "I Wanna Dance with Somebody - Whitney Houston",
+            "Livin' on a Prayer - Bon Jovi", "Sweet Dreams (Are Made of This) - Eurythmics", "I Want It That Way - Backstreet Boys",
+            "Wonderwall - Oasis", "Crazy in Love - Beyoncé ft. Jay-Z", "Hey Ya! - Outkast", "Since U Been Gone - Kelly Clarkson",
+            "Umbrella - Rihanna ft. Jay-Z", "Hips Don't Lie - Shakira ft. Wyclef Jean", "Rolling in the Deep - Adele",
+            "Uptown Funk - Mark Ronson ft. Bruno Mars", "Happy - Pharrell Williams", "Despacito - Luis Fonsi & Daddy Yankee",
+            "Shape of You - Ed Sheeran", "As It Was - Harry Styles", "Blinding Lights - The Weeknd", "Good 4 u - Olivia Rodrigo",
+            "Drivers License - Olivia Rodrigo", "Bad Guy - Billie Eilish", "Bohemian Rhapsody - Queen", "Imagine - John Lennon",
+            "Stayin' Alive - Bee Gees", "Hotel California - Eagles", "Hound Dog - Elvis Presley", "Great Balls of Fire - Jerry Lee Lewis",
+            "La Bamba - Ritchie Valens", "What'd I Say - Ray Charles", "Tutti Frutti - Little Richard", "My Girl - The Temptations",
+            "(I Can't Get No) Satisfaction - The Rolling Stones", "I Heard It Through the Grapevine - Marvin Gaye",
+            "Hey Jude - The Beatles", "Respect - Aretha Franklin", "Material Girl - Madonna",
+            "Girls Just Want to Have Fun - Cyndi Lauper", "Take On Me - A-ha", "With or Without You - U2",
+            "Walking on Sunshine - Katrina & The Waves", "Gimme More - Britney Spears", "Poker Face - Lady Gaga",
+            "Single Ladies (Put a Ring on It) - Beyoncé", "Mr. Brightside - The Killers", "Firework - Katy Perry",
+            "Someone Like You - Adele", "Can't Hold Us - Macklemore & Ryan Lewis", "Party Rock Anthem - LMFAO",
+            "Watermelon Sugar - Harry Styles", "Levitating - Dua Lipa", "Savage - Megan Thee Stallion",
+            "WAP - Cardi B ft. Megan Thee Stallion", "What's Love Got to Do with It - Tina Turner",
+            "Careless Whisper - George Michael", "Jessie's Girl - Rick Springfield", "Another One Bites the Dust - Queen",
+            "Torn - Natalie Imbruglia", "Macarena - Los del Río", "Vogue - Madonna", "One - U2",
+            "Whenever, Wherever - Shakira", "In Da Club - 50 Cent", "Beautiful Day - U2",
+            "Can't Get You Out of My Head - Kylie Minogue", "Get Lucky - Daft Punk ft. Pharrell Williams",
+            "Thinking Out Loud - Ed Sheeran", "Shallow - Lady Gaga & Bradley Cooper",
+            "Old Town Road - Lil Nas X ft. Billy Ray Cyrus", "All of Me - John Legend", "Heat Waves - Glass Animals",
+            "Stay - The Kid LAROI & Justin Bieber", "Kiss Me More - Doja Cat ft. SZA", "About Damn Time - Lizzo",
+            "Unholy - Sam Smith & Kim Petras", "Backstreet's Back - Backstreet Boys", "Barbie Girl - Aqua",
+            "Livin' La Vida Loca - Ricky Martin", "Smooth - Santana ft. Rob Thomas",
+            "Genie in a Bottle - Christina Aguilera", "The Real Slim Shady - Eminem", "Hollaback Girl - Gwen Stefani",
+            "Sweet Escape - Gwen Stefani ft. Akon", "Locked Out Of Heaven - Bruno Mars",
 
-            // --- CATEGORY 2: PLACEHOLDER (Use tag 'cat2') ---
-            // PASTE YOUR LIST FOR CATEGORY 2 HERE. 
-            "Placeholder Song D": { artist: "Placeholder Artist 4", genres: ["cat2"] },
-            "Placeholder Song E": { artist: "Placeholder Artist 5", genres: ["cat2"] },
-            "Placeholder Song F": { artist: "Placeholder Artist 6", genres: ["cat2"] },
-
-
-            // --- CATEGORY 3: 90s Rock (96 Songs) - Tag: 'cat3' ---
-            "Smells Like Teen Spirit": { artist: "Nirvana", genres: ["cat3", "90s", "rock"] },
-            "November Rain": { artist: "Guns N' Roses", genres: ["cat3", "90s", "rock"] },
-            "What's Up?": { artist: "4 Non Blondes", genres: ["cat3", "90s", "rock"] },
-            "Losing My Religion": { artist: "R.E.M.", genres: ["cat3", "90s", "rock"] },
-            "Everlong": { artist: "Foo Fighters", genres: ["cat3", "90s", "rock"] },
-            "Don't Speak": { artist: "No Doubt", genres: ["cat3", "90s", "pop", "rock"] },
-            "Self Esteem (2008 Remaster)": { artist: "The Offspring", genres: ["cat3", "90s", "rock", "punk"] },
-            "1979": { artist: "The Smashing Pumpkins", genres: ["cat3", "90s", "rock"] },
-            "Basket Case": { artist: "Green Day", genres: ["cat3", "90s", "rock", "punk"] },
-            "Under the Bridge": { artist: "Red Hot Chili Peppers", genres: ["cat3", "90s", "rock"] },
-            "Black Hole Sun": { artist: "Soundgarden", genres: ["cat3", "90s", "rock"] },
-            "All Star": { artist: "Smash Mouth", genres: ["cat3", "90s", "pop", "rock"] },
-            "Fly Away": { artist: "Lenny Kravitz", genres: ["cat3", "90s", "rock"] },
-            "Buddy Holly": { artist: "Weezer", genres: ["cat3", "90s", "rock"] },
-            "Glycerine": { artist: "Bush", genres: ["cat3", "90s", "rock"] },
-            "Cannonball": { artist: "The Breeders", genres: ["cat3", "90s", "rock"] },
-            "Been Caught Stealing": { artist: "Jane's Addiction", genres: ["cat3", "90s", "rock"] },
-            "Midlife Crisis": { artist: "Faith No More", genres: ["cat3", "90s", "rock"] },
-            "Jeremy": { artist: "Pearl Jam", genres: ["cat3", "90s", "rock"] },
-            "Song 2": { artist: "Blur", genres: ["cat3", "90s", "rock"] },
-            "Killing In the Name": { artist: "Rage Against The Machine", genres: ["cat3", "90s", "rock"] },
-            "You Could Be Mine": { artist: "Guns N' Roses", genres: ["cat3", "90s", "rock"] },
-            "Motorcycle Emptiness": { artist: "Manic Street Preachers", genres: ["cat3", "90s", "rock"] },
-            "Monkey Wrench": { artist: "Foo Fighters", genres: ["cat3", "90s", "rock"] },
-            "Plush": { artist: "Stone Temple Pilots", genres: ["cat3", "90s", "rock"] },
-            "Suck My Kiss": { artist: "Red Hot Chili Peppers", genres: ["cat3", "90s", "rock"] },
-            "Come As You Are": { artist: "Nirvana", genres: ["cat3", "90s", "rock"] },
-            "Bullet With Butterfly Wings": { artist: "The Smashing Pumpkins", genres: ["cat3", "90s", "rock"] },
-            "Outshined": { artist: "Soundgarden", genres: ["cat3", "90s", "rock"] },
-            "Alive": { artist: "Pearl Jam", genres: ["cat3", "90s", "rock"] },
-            "Age of Panic (Git-O-Rama Mix)": { artist: "Senser", genres: ["cat3", "90s", "rock"] },
-            "Digging the Grave": { artist: "Faith No More", genres: ["cat3", "90s", "rock"] },
-            "Screamager": { artist: "Therapy?", genres: ["cat3", "90s", "rock"] },
-            "Higher Ground (Remastered 2003)": { artist: "Red Hot Chili Peppers", genres: ["cat3", "90s", "rock"] },
-            "Hobo Humpin' Slobo Babe": { artist: "Whale", genres: ["cat3", "90s", "pop"] },
-            "Sabotage": { artist: "Beastie Boys", genres: ["cat3", "90s", "hiphop"] },
-            "Alice What's the Matter?": { artist: "Terrorvision", genres: ["cat3", "90s", "rock"] },
-            "This Is a Call": { artist: "Foo Fighters", genres: ["cat3", "90s", "rock"] },
-            "All I Wanna Do": { artist: "Sheryl Crow", genres: ["cat3", "90s", "pop"] },
-            "The Chemicals Between Us": { artist: "Bush", genres: ["cat3", "90s", "rock"] },
-            "Lump": { artist: "The Presidents Of The United States Of America", genres: ["cat3", "90s", "rock"] },
-            "A Design for Life (2016 Remastered Version)": { artist: "Manic Street Preachers", genres: ["cat3", "90s", "rock"] },
-            "Pretty Fly (For A White Guy)": { artist: "The Offspring", genres: ["cat3", "90s", "rock", "punk"] },
-            "Bulls On Parade": { artist: "Rage Against The Machine", genres: ["cat3", "90s", "rock"] },
-            "Cherub Rock": { artist: "Smashing Pumpkins", genres: ["cat3", "90s", "rock"] },
-            "Heart-Shaped Box": { artist: "Nirvana", genres: ["cat3", "90s", "rock"] },
-            "Even Flow": { artist: "Pearl Jam", genres: ["cat3", "90s", "rock"] },
-            "Don't Cry": { artist: "Guns N' Roses", genres: ["cat3", "90s", "rock"] },
-            "No Rain": { artist: "Blind Melon", genres: ["cat3", "90s", "rock"] },
-            "Lovin' Machine": { artist: "The Jon Spencer Blues Explosion", genres: ["cat3", "90s", "rock"] },
-            "Everything About You": { artist: "Ugly Kid Joe", genres: ["cat3", "90s", "rock"] },
-            "Kill Your Television": { artist: "Ned's Atomic Dustbin", genres: ["cat3", "90s", "rock"] },
-            "Aeroplane": { artist: "Red Hot Chili Peppers", genres: ["cat3", "90s", "rock"] },
-            "About A Girl": { artist: "Nirvana", genres: ["cat3", "90s", "rock"] },
-            "You Oughta Know": { artist: "Alanis Morissette", genres: ["cat3", "90s", "rock", "pop"] },
-            "Easy": { artist: "Faith No More", genres: ["cat3", "90s", "rock"] },
-            "Today": { artist: "Smashing Pumpkins", genres: ["cat3", "90s", "rock"] },
-            "Once": { artist: "Pearl Jam", genres: ["cat3", "90s", "rock"] },
-            "Longview": { artist: "Green Day", genres: ["cat3", "90s", "rock", "punk"] },
-            "Drive (Incubus)": { artist: "Incubus", genres: ["cat3", "90s", "rock"] },
-            "Kevin Carter (Remastered Version)": { artist: "Manic Street Preachers", genres: ["cat3", "90s", "rock"] },
-            "Runaway Train (2022 Remaster)": { artist: "Soul Asylum", genres: ["cat3", "90s", "rock"] },
-            "Drive (R.E.M.)": { artist: "R.E.M.", genres: ["cat3", "90s", "rock"] },
-            "Perseverance": { artist: "Terrorvision", genres: ["cat3", "90s", "rock"] },
-            "Remedy": { artist: "The Black Crowes", genres: ["cat3", "90s", "rock"] },
-            "In Bloom": { artist: "Nirvana", genres: ["cat3", "90s", "rock"] },
-            "Hard To Handle": { artist: "The Black Crowes", genres: ["cat3", "90s", "rock"] },
-            "Stupid Girl": { artist: "Garbage", genres: ["cat3", "90s", "rock"] },
-            "Civil War": { artist: "Guns N' Roses", genres: ["cat3", "90s", "rock"] },
-            "Walkin' On The Sun": { artist: "Smash Mouth", genres: ["cat3", "90s", "pop", "rock"] },
-            "Come Back Brighter": { artist: "Reef", genres: ["cat3", "90s", "rock"] },
-            "Come Out and Play (2008 Remaster)": { artist: "The Offspring", genres: ["cat3", "90s", "rock", "punk"] },
-            "Richard III": { artist: "Supergrass", genres: ["cat3", "90s", "rock"] },
-            "I Think I'm Paranoid": { artist: "Garbage", genres: ["cat3", "90s", "rock"] },
-            "Fell On Black Days": { artist: "Soundgarden", genres: ["cat3", "90s", "rock"] },
-            "Celebrity Skin": { artist: "Hole", genres: ["cat3", "90s", "rock"] },
-            "A Change Would Do You Good": { artist: "Sheryl Crow", genres: ["cat3", "90s", "pop"] },
-            "Just A Girl": { artist: "No Doubt", genres: ["cat3", "90s", "pop", "rock"] },
-            "Black": { artist: "Pearl Jam", genres: ["cat3", "90s", "rock"] },
-            "Scar Tissue": { artist: "Red Hot Chili Peppers", genres: ["cat3", "90s", "rock"] },
-            "Santa Monica": { artist: "Everclear", genres: ["cat3", "90s", "rock"] },
-            "Lithium": { artist: "Nirvana", genres: ["cat3", "90s", "rock"] },
-            "Semi-Charmed Life": { artist: "Third Eye Blind", genres: ["cat3", "90s", "pop", "rock"] },
-            "My Own Worst Enemy": { artist: "Lit", genres: ["cat3", "90s", "rock"] },
-            "Muscle Museum": { artist: "Muse", genres: ["cat3", "90s", "rock"] },
-            "Butterfly": { artist: "Crazy Town", genres: ["cat3", "90s", "hiphop", "rock"] },
-            "The Red": { artist: "Chevelle", genres: ["cat3", "90s", "rock"] },
-            "Crazy (Aerosmith)": { artist: "Aerosmith", genres: ["cat3", "90s", "rock"] },
-            "Nancy Boy": { artist: "Placebo", genres: ["cat3", "90s", "rock"] },
-            "Mrs. Robinson (2022 Remastered Edition)": { artist: "The Lemonheads", genres: ["cat3", "90s", "rock"] },
-            "(Everything I Do) I Do It For You (Classic Version)": { artist: "Bryan Adams", genres: ["cat3", "90s", "pop"] },
-            "All Apologies (2013 Mix)": { artist: "Nirvana", genres: ["cat3", "90s", "rock"] },
-            "I Don't Want to Miss a Thing (From 'Armageddon' Soundtrack)": { artist: "Aerosmith", genres: ["cat3", "90s", "rock"] },
-            "Every You Every Me": { artist: "Placebo", genres: ["cat3", "90s", "rock"] },
-        };
-
-        // --- LOGIC STARTS HERE ---
-
-        // Configuration for 3x3 Bingo Cards (8 songs + 1 free space = 9 total cells)
-        const CARD_COUNT = 6; // Generates 6 unique cards (1 page of 6)
-        const CARD_SIZE = 8; // Number of unique songs required on the card (excluding free space)
+            // Rock & '70s-'25 Mix List
+            "Whole Lotta Love - Led Zeppelin", "Highway to Hell - AC/DC", "Another Brick in the Wall, Pt. 2 - Pink Floyd",
+            "Walk This Way - Aerosmith", "Baba O'Riley - The Who", "Light My Fire - The Doors",
+            "Born to Run - Bruce Springsteen", "Layla - Derek and the Dominos", "Thunderstruck - AC/DC",
+            "Back in Black - AC/DC", "Dream On - Aerosmith", "More Than a Feeling - Boston",
+            "Paranoid - Black Sabbath", "Go Your Own Way - Fleetwood Mac", "Killing in the Name - Rage Against the Machine",
+            "American Idiot - Green Day", "Seven Nation Army - The White Stripes", "When You Were Young - The Killers",
+            "The Sound of Silence - Simon & Garfunkel", "Free Bird - Lynyrd Skynyrd", "Purple Haze - The Jimi Hendrix Experience",
+            "Welcome to the Jungle - Guns N' Roses", "I Love Rock 'n' Roll - Joan Jett & the Blackhearts",
+            "Wind of Change - Scorpions", "Zombie - The Cranberries", "Californication - Red Hot Chili Peppers",
+            "Iris - Goo Goo Dolls", "Lithium - Nirvana", "Creep - Radiohead", "Kashmir - Led Zeppelin",
+            "Sweet Emotion - Aerosmith", "Gimme Shelter - The Rolling Stones", "Paint It Black - The Rolling Stones",
+            "Iron Man - Black Sabbath", "Sultans of Swing - Dire Straits", "The Chain - Fleetwood Mac",
+            "Living After Midnight - Judas Priest", "Master of Puppets - Metallica", "The Final Countdown - Europe",
+            "Still Loving You - Scorpions", "You Oughta Know - Alanis Morissette",
+            "Good Riddance (Time of Your Life) - Green Day", "All the Small Things - blink-182",
+            "Dani California - Red Hot Chili Peppers", "In the End - Linkin Park", "Chop Suey! - System of a Down",
+            "The Pretender - Foo Fighters", "Welcome to the Black Parade - My Chemical Romance",
+            "R U Mine? - Arctic Monkeys", "Ho Hey - The Lumineers", "Lonely Boy - The Black Keys",
+            "Radioactive - Imagine Dragons", "Eye of the Tiger - Survivor", "We Will Rock You - Queen",
+            "Shook Me All Night Long - AC/DC", "Jailhouse Rock - Elvis Presley", "Johnny B. Goode - Chuck Berry",
+            "Blue Suede Shoes - Carl Perkins", "A Whiter Shade of Pale - Procol Harum", "Like a Rolling Stone - Bob Dylan",
+            "Sympathy for the Devil - The Rolling Stones", "Helter Skelter - The Beatles", "Smoke on the Water - Deep Purple",
+            "Running with the Devil - Van Halen", "Wanted Dead or Alive - Bon Jovi", "I Wanna Rock - Twisted Sister",
+            "Kickstart My Heart - Mötley Crüe", "Machinehead - Bush", "Learn to Fly - Foo Fighters",
+            "Another Day in Paradise - Phil Collins", "Walk Like an Egyptian - The Bangles",
+            "Physical - Olivia Newton-John", "Owner of a Lonely Heart - Yes", "The Safety Dance - Men Without Hats",
+            "How Will I Know - Whitney Houston", "Here I Go Again - Whitesnake", "Super Freak - Rick James",
+            "Rosanna - Toto", "We Got the Beat - The Go-Go's", "Just Can't Get Enough - Depeche Mode",
+            "Sledgehammer - Peter Gabriel", "True Colors - Cyndi Lauper", "Keep on Loving You - REO Speedwagon",
+            "The Look - Roxette", "If You Leave - OMD", "Abracadabra - Steve Miller Band",
+            "It's Raining Men - The Weather Girls", "The Tide Is High - Blondie", "Blue Monday - New Order",
+            "Our House - Madness", "Burning Heart - Survivor", "The Flame - Cheap Trick", "Kyrie - Mr. Mister",
+            "Melt With You - Modern English", "Heaven - Bryan Adams", "Against All Odds - Phil Collins",
+            "She Blinded Me with Science - Thomas Dolby", "Money for Nothing - Dire Straits",
+            "Raspberry Beret - Prince", "Lost in Emotion - Lisa Lisa & Cult Jam", "Eternal Flame - The Bangles",
+            "If I Could Turn Back Time - Cher", "Got My Mind Set on You - George Harrison",
+            "Simply Irresistible - Robert Palmer", "September - Earth, Wind & Fire", "Sweet Caroline - Neil Diamond",
+            "Jump Around - House of Pain", "Tearin' Up My Heart - *NSYNC", "Yellow - Coldplay",
+            "I Believe in a Thing Called Love - The Darkness", "Shut Up and Dance - Walk the Moon",
+            "Can't Stop the Feeling! - Justin Timberlake", "Mr. Saxobeat - Alexandra Stan", "Seven Rings - Ariana Grande",
+            "Kill Bill - SZA", "Anti-Hero - Taylor Swift", "Rich Flex - Drake & 21 Savage",
+            "American Pie - Don McLean", "Heart of Glass - Blondie"
+        ];
+        
+        let SONG_DATA = {}; // This will hold the structured data
         let currentGenre = 'all';
+
+        // --- Configuration for 4x4 Bingo Cards ---
+        const CARD_COUNT = 6; // Generates 6 unique cards
+        const CARD_SIZE = 15; // Number of unique songs required on the card (15 songs + 1 free space = 16 cells)
+        const FREE_SPACE_INDEX = 7; // Center of a 4x4 grid (0-indexed: index 7 is 8th cell)
+
+        /*
+         * --- DATA PROCESSING FUNCTIONS ---
+         */
+
+        // Simple lookup for determining the approximate decade based on artist/song
+        function determineDecade(title, artist) {
+            // NOTE: This is a simplistic lookup and may not be 100% accurate for every song/artist
+            
+            // Modern songs
+            if (title.includes("Drivers License") || title.includes("Good 4 u") || title.includes("Heat Waves") || title.includes("As It Was") || title.includes("Unholy") || title.includes("Kill Bill") || title.includes("Anti-Hero") || title.includes("Rich Flex") || title.includes("About Damn Time")) return '20s';
+            if (title.includes("Blinding Lights") || title.includes("Watermelon Sugar") || title.includes("Levitating") || title.includes("Old Town Road")) return '20s';
+
+            // 2010s
+            if (title.includes("Can't Stop the Feeling") || title.includes("Shut Up and Dance") || title.includes("Thinking Out Loud") || title.includes("Shallow") || title.includes("Happy") || title.includes("Uptown Funk") || title.includes("Call Me Maybe") || title.includes("Radioactive") || title.includes("Ho Hey")) return '10s';
+            if (artist.includes("Adele") || artist.includes("Bruno Mars") || artist.includes("Ed Sheeran") || artist.includes("Taylor Swift") || artist.includes("Imagine Dragons")) return '10s';
+
+            // 2000s
+            if (title.includes("Complicated") || title.includes("Crazy in Love") || title.includes("Hey Ya") || title.includes("Umbrella") || title.includes("Since U Been Gone") || title.includes("Mr. Brightside") || title.includes("Firework") || title.includes("Can't Get You Out of My Head") || title.includes("In Da Club") || title.includes("Sweet Escape") || title.includes("Hollaback Girl")) return '00s';
+            if (artist.includes("Avril Lavigne") || artist.includes("The Killers") || artist.includes("Katy Perry") || artist.includes("Beyoncé") || artist.includes("Linkin Park") || artist.includes("System of a Down")) return '00s';
+
+            // 1990s
+            if (title.includes("Baby One More Time") || title.includes("Believe") || title.includes("Bitch") || title.includes("Breakfast At Tiffany's") || title.includes("Closing Time") || title.includes("Doo Wop (That Thing)") || title.includes("Dreams - The Cranberries") || title.includes("Every Morning") || title.includes("Smells Like Teen Spirit") || title.includes("Wonderwall") || title.includes("Torn") || title.includes("Macarena") || title.includes("Backstreet's Back")) return '90s';
+            if (artist.includes("Britney Spears") || artist.includes("The Offspring") || artist.includes("Nirvana") || artist.includes("Backstreet Boys") || artist.includes("Goo Goo Dolls") || artist.includes("Alanis Morissette")) return '90s';
+
+            // 1980s
+            if (title.includes("867-5309") || title.includes("9 to 5") || title.includes("Africa - Toto") || title.includes("All Night Long") || title.includes("Come On Eileen") || title.includes("Everybody Wants to rule the world") || title.includes("Livin' on a Prayer") || title.includes("Sweet Dreams") || title.includes("Girls Just Want to Have Fun") || title.includes("Take On Me") || title.includes("Careless Whisper") || title.includes("Jessie's Girl") || title.includes("The Safety Dance")) return '80s';
+            if (artist.includes("Madonna") || artist.includes("Whitney Houston") || artist.includes("Bon Jovi") || artist.includes("Eurythmics") || artist.includes("A-ha") || artist.includes("Toto")) return '80s';
+
+            // 1970s
+            if (title.includes("Brandy") || title.includes("Beast Of Burden") || title.includes("Dancing Queen") || title.includes("Don't Stop Me Now") || title.includes("Hotel California") || title.includes("Bohemian Rhapsody") || title.includes("Stayin' Alive") || title.includes("Sweet Caroline")) return '70s';
+            if (artist.includes("Queen") || artist.includes("ABBA") || artist.includes("Led Zeppelin") || artist.includes("Pink Floyd") || artist.includes("Aerosmith") || artist.includes("Earth, Wind & Fire")) return '70s';
+
+            // 1960s & Earlier (Grouped as Classic)
+            return '60s';
+        }
+
+        function processSongList(rawList) {
+            const processedData = {};
+            const uniqueDecades = new Set(['all']); // Start with 'all'
+
+            rawList.forEach(item => {
+                const parts = item.split(' - ');
+                if (parts.length === 2) {
+                    const title = parts[0].trim();
+                    const artist = parts[1].trim();
+                    const decade = determineDecade(title, artist);
+
+                    processedData[title] = {
+                        artist: artist,
+                        genres: [decade],
+                        decade: decade // Store decade explicitly
+                    };
+                    uniqueDecades.add(decade);
+                }
+            });
+
+            // Dynamically create the decade buttons
+            const decadeTabs = document.getElementById('decade-tabs');
+            decadeTabs.innerHTML = ''; // Clear existing buttons
+            
+            // Sort decades for display
+            const sortedDecades = Array.from(uniqueDecades).filter(d => d !== 'all').sort().reverse();
+            
+            // Add 'Complete Mix' back first
+            decadeTabs.innerHTML += `<button class="tab-button active" data-genre="all">Complete Mix</button>`;
+
+            sortedDecades.forEach(decade => {
+                decadeTabs.innerHTML += `<button class="tab-button" data-genre="${decade}">${decade.toUpperCase()}</button>`;
+            });
+
+            // Re-attach event listeners to the newly created buttons
+            attachEventListeners();
+            
+            return processedData;
+        }
+
+        /*
+         * --- BINGO GENERATION FUNCTIONS (Modified for 4x4) ---
+         */
 
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -474,40 +471,47 @@
         function generateBingoCards() {
             const availableSongs = getFilteredSongs(currentGenre);
             
-            // Safety check: Needs enough songs for 10 unique winning potential cards (10 * 8 = 80 unique songs needed)
-            const requiredUniqueSongs = Math.max(80, CARD_SIZE * CARD_COUNT); 
+            // Safety Check: Needs enough songs (CARD_SIZE * CARD_COUNT)
+            const requiredSongs = CARD_SIZE * CARD_COUNT;
             
-            if (availableSongs.length < requiredUniqueSongs) {
-                alert(`Warning: The current category ('${currentGenre}') only has ${availableSongs.length} unique songs. You need at least ${requiredUniqueSongs} unique songs to guarantee 10 potential winning tickets! Please add more songs or switch to 'Complete Mix'.`);
-                // We still allow card generation if the list is big enough for at least one card set (CARD_SIZE * CARD_COUNT)
-                if (availableSongs.length < CARD_SIZE * CARD_COUNT) {
-                    alert(`Error: Cannot generate ${CARD_COUNT} cards, list is too short.`);
-                    return;
-                }
+            if (availableSongs.length < requiredSongs) {
+                alert(`Error: The current category ('${currentGenre.toUpperCase()}') only has ${availableSongs.length} unique songs, but you need ${requiredSongs} to generate ${CARD_COUNT} unique 4x4 cards. Please select 'Complete Mix' or a category with more songs.`);
+                return;
             }
-
+            
             const cardContainer = document.getElementById('card-container');
             const playlistOutput = document.getElementById('playlist-output');
             cardContainer.innerHTML = '';
             playlistOutput.innerHTML = '';
 
+            // 1. Shuffle and slice the exact number of unique songs needed for all cards
             const shuffledSongs = shuffleArray([...availableSongs]);
-            // Use enough songs to fill all cards
-            const songsOnCards = shuffledSongs.slice(0, CARD_SIZE * CARD_COUNT);
+            const songsOnCards = shuffledSongs.slice(0, requiredSongs); 
+
+            const masterPlaylistSongs = new Set(); 
 
             for (let i = 0; i < CARD_COUNT; i++) {
-                // Take a unique slice of songs for this card's set
-                const cardSongs = shuffleArray(songsOnCards.slice(i * CARD_SIZE, (i + 1) * CARD_SIZE)); 
+                // 2. Take the unique slice for this specific card
+                const start = i * CARD_SIZE;
+                const end = (i + 1) * CARD_SIZE;
                 
-                // Insert free space at the center position (index 4 of 9 total cells)
-                cardSongs.splice(4, 0, { full_name: "🎶 FREE SPACE 🎶", isFree: true });
+                const cardSongsSegment = songsOnCards.slice(start, end); 
+
+                // 3. Randomize the song positions *within* this card's set
+                const cardSongs = shuffleArray(cardSongsSegment); 
+
+                // 4. Record the songs for the master playlist
+                cardSongs.forEach(song => masterPlaylistSongs.add(song.full_name)); 
+                
+                // Insert free space at the center position (index 7 of 16 total cells)
+                cardSongs.splice(FREE_SPACE_INDEX, 0, { full_name: "🎶 FREE SPACE 🎶", isFree: true });
 
                 const card = document.createElement('div');
                 card.className = 'bingo-card';
                 
                 const title = document.createElement('div');
                 title.className = 'card-title';
-                title.textContent = `BINGO CARD #${i + 1}`;
+                title.textContent = `${currentGenre.toUpperCase()} BINGO CARD #${i + 1}`;
                 card.appendChild(title);
 
                 const grid = document.createElement('div');
@@ -516,9 +520,10 @@
                 cardSongs.forEach(song => {
                     const cell = document.createElement('div');
                     cell.className = 'card-cell';
-                    cell.textContent = song.full_name;
+                    // Use only the song title for the cell if it's the free space, otherwise use full name
+                    cell.textContent = song.isFree ? song.full_name : song.full_name; 
                     if (song.isFree) {
-                         cell.classList.add('free-space');
+                        cell.classList.add('free-space');
                     }
                     grid.appendChild(cell);
                 });
@@ -527,8 +532,13 @@
                 cardContainer.appendChild(card);
             }
 
-            // Use only the songs that actually appear on the cards for the playlist output
-            shuffleArray(songsOnCards) 
+            // Generate the Master Playlist from the recorded songs and shuffle it for calling order
+            const finalPlaylist = Array.from(masterPlaylistSongs).map(fullName => {
+                // We don't need to parse artist/title again, just format the list item
+                return { full_name: fullName }; 
+            });
+
+            shuffleArray(finalPlaylist)
                 .forEach(song => {
                     const listItem = document.createElement('li');
                     listItem.textContent = song.full_name;
@@ -536,20 +546,31 @@
                 });
         }
 
-        document.querySelectorAll('.tab-button').forEach(button => {
-            button.addEventListener('click', function() {
-                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                currentGenre = this.getAttribute('data-genre');
-                generateBingoCards();
+        function attachEventListeners() {
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.removeEventListener('click', tabClickHandler); // Remove old listener if re-attaching
+                button.addEventListener('click', tabClickHandler);
             });
-        });
-
-        document.getElementById('generate-button').addEventListener('click', generateBingoCards);
-
-        document.addEventListener('DOMContentLoaded', () => {
+        }
+        
+        function tabClickHandler() {
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            currentGenre = this.getAttribute('data-genre');
             generateBingoCards();
+        }
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Process the raw list into categorized, structured data
+            SONG_DATA = processSongList(RAW_SONG_LIST);
+
+            // 2. Generate initial cards using the default 'all' mix
+            generateBingoCards();
+
+            // 3. Attach event listener to the main generate button (tabs are attached in processSongList)
+            document.getElementById('generate-button').addEventListener('click', generateBingoCards);
         });
     </script>
-    </body>
+</body>
 </html>
